@@ -162,19 +162,20 @@ audio{
 
 
 <div class="content">
-<h1>DAFT-EXPRT: ROBUST PROSODY TRANSFER ACROSS SPEAKERS FOR EXPRESSIVE SPEECH SYNTHESIS</h1>
+<h1>Daft-Exprt: Cross-Speaker Prosody Transfer on Any Text for Expressive Speech Synthesis</h1>
 <audio controls="controls" preload="none"><source src="samples/intro/20_seen_model0_sent0_tgt4_HiFi.wav" autoplay=""></audio>
 <p><b>Code:</b> <a href="https://github.com/ubisoft/ubisoft-laforge-daft-exprt">[GitHub]</a></p></p>
 <p><b>Paper:</b> <a href="https://arxiv.org/abs/2108.02271">[arXiv]</a></p></p>
 <p><b>Authors:</b> Julian Za&iuml;di, Hugo Seut&eacute;, Benjamin van Niekerk, Marc-Andr&eacute; Carbonneau</p>
-<p><b>Abstract:</b> This paper presents Daft-Exprt, a multi-speaker acoustic model advancing the state-of-the-art 
-	on inter-speaker and inter-text prosody transfer. This improvement is achieved using FiLM conditioning layers, 
-	alongside adversarial training that encourages disentanglement between prosodic information and speaker identity. 
-	The acoustic model inherits attractive qualities from FastSpeech 2, such as fast inference and local prosody attributes 
-	prediction for finer grained control over generation. Experimental results show that Daft-Exprt significantly outperforms 
-	strong baselines on prosody transfer tasks, while yielding naturalness comparable to state-of-the-art expressive models. 
-	Moreover, results indicate that adversarial training effectively discards speaker identity information from the prosody 
-	representation, which ensures Daft-Exprt will consistently generate speech with the desired voice.</p>
+<p><b>Abstract:</b> This paper presents Daft-Exprt, a multi-speaker acoustic model advancing the state-of-the-art for cross-speaker 
+	prosody transfer on any text. This is one of the most challenging, and rarely directly addressed, task in speech synthesis, especially 
+	for highly expressive data. Daft-Exprt uses FiLM conditioning layers to strategically inject different prosodic information in all 
+	parts of the architecture. The model explicitly encodes traditional low-level prosody features such as pitch, loudness and duration, 
+	but also higher level prosodic information that helps generating convincing voices in highly expressive styles. Speaker identity and 
+	prosodic information are disentangled through an adversarial training strategy that enables accurate prosody transfer across speakers. 
+	Experimental results show that Daft-Exprt significantly outperforms strong baselines on inter-text cross-speaker prosody transfer tasks, 
+	while yielding naturalness comparable to state-of-the-art expressive models. Moreover, results indicate that the model discards speaker 
+	identity information from the prosody representation, and consistently generate speech with the desired voice.</p>
 
 <p><mark><b>If you are having trouble listening to the audios, try refreshing the page.</b></mark></p>
 
