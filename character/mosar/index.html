@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Monocular 3D Face Reconstruction using Differentiable Shading">
+  <meta name="keywords" content="3D face reconstruction, inverse rendering, differentiable rendering, ">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MoSAR: Monocular Semi-Supervised Model for Avatar Reconstruction using Differentiable Shading</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+	
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/mosar/ubisoft.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://www.ubisoft.com/en-us/studio/laforge">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <!-- <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>-->
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">MoSAR: Monocular Semi-Supervised Model For Avatar Reconstruction Using Differentiable Shading</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://abdallahdib.github.io/">Abdallah Dib</a><sup>1*</sup>,</span>
+            <span class="author-block">
+              <a href="https://luiz.hafemann.ca/">Luiz Gustavo Hafemann</a><sup>1*</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/emeline-got/">Emeline Got</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/t-anderson/">Trevor Anderson</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/amin-fadaeinejad/">Amin Fadaeinejad</a><sup>1, 2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.etsmtl.ca/en/research/professors/rcruz/">Rafael M. O. Cruz</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://macarbonneau.github.io/">Marc-André Carbonneau</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+		  
+            <span class="author-block"><sup>1</sup>Ubisoft LaForge,</span>
+			<span class="author-block"><sup>2</sup>York University,</span>
+			<span class="author-block"><sup>3</sup>Ecole de Technologie Supérieure </span><br />
+			
+            <span class="author-block" style="font-size:0.7em"><sup>*</sup>Equal contribution</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              
+              <span class="link-block">
+                <a href="#top"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="#pres"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="#top"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Dataset</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      
+		<video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/teaser.mp4"
+                    type="video/mp4">
+          </video>
+      
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">MoSAR</span> turns a portrait image into a relightable 3D avatar. It estimates detailed geometry, rich reflectance maps (diffuse, specular, normals, ambient occlusion, translucency) at 4K resolution.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body" >
+    <div class="container" >
+      <div id="results-carousel" class="carousel results-carousel" >
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/carousel1/1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/carousel1/2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+		<div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/carousel1/17.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/carousel1/3.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/carousel1/4.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+		<div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/carousel1/5.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+		<div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/carousel1/6.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+		<div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/carousel1/7.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+		<div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/carousel1/8.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+		<div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/carousel1/9.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+		<div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/carousel1/10.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Reconstructing an avatar from a portrait image has many applications in multimedia, but remains a challenging research problem. Extracting reflectance maps and geometry from one image is ill-posed: recovering geometry is a one-to-many mapping problem and reflectance and light are difficult to disentangle. Accurate geometry and reflectance can be captured under the controlled conditions of a light stage, but it is costly to acquire large datasets in this fashion. Moreover, training solely with this type of data leads to poor generalization with in-the-wild images. This motivates the introduction of MoSAR, a method for 3D avatar generation from monocular images. We propose a semi-supervised training scheme that improves generalization by learning from both light stage and in-the-wild datasets. This is achieved using a novel differentiable shading formulation. We show that our approach effectively disentangles the intrinsic face parameters, producing relightable avatars. As a result, MoSAR estimates a richer set of skin reflectance maps, and generates more realistic avatars than existing state-of-the-art methods.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <!-- Paper video. -->
+    <div id="pres" class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video (with audio)</h2>
+        <div class="publication-video">
+		<video poster="" id="steve" autoplay controls loop playsinline height="100%">
+            <source src="./static/mosar/Mosarv2_af_small_V003.mp4"
+                    type="video/mp4">
+          </video>
+          
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body" >
+  
+    <div class="container" >
+	
+	<h2 class="title is-3"><span class="dnerf">MoSAR</span> captures pore-level details</h2>
+      <div id="results-carousel" class="carousel results-carousel" >
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/zoom/1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/zoom/8.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/zoom/28.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/mosar/zoom/32.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        </div>
+		
+      </div>
+    </div>
+	
+  </div>
+  
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+
+
+    <!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">FFHQ-UV-Intrinsics dataset </h2>
+
+        <div class="content has-text-justified">
+          <p>
+		  
+            We release a new dataset, named  <em>FFHQ-UV-Intrinsics</em>, that contains intrinsics texture maps for $10$K subjects from the publicly available dataset <a href="https://github.com/csbhr/FFHQ-UV">FFHQ-UV</a>. 
+The <a href="https://github.com/csbhr/FFHQ-UV">FFHQ-UV</a> dataset is composed of texture maps of 1K resolution, for subjects sampled from the latent space of StyleGAN. These texture contains evenly illuminated face images. However, light, geometry and skin reflectance information are entangled in the same texture making them less suitable for relighting.
+
+<br />To obtain the intrinsic face attributes, we first re-targeted the texture maps to our own topology and resize them to 512x512. Next, we apply the proposed light normalization and Intrinsic texture maps estimation steps. We then upscale these texture maps to 1K resolution and retarget them back to their original topology. 
+
+
+<br />The resulting dataset, <em>FFHQ-UV-Intrinsics</em>, is being publicly released for the research community under 
+Creative Commons Attribution-NonCommercial-NoDerivatives license. The dataset contains diffuse, specular, ambient occlusion, translucency and normal maps for $10$K subjects. This is the first dataset that offer rich intrinsic face attributes at high resolution and at large scale, with the aim of advancing research in this field. 
+          
+		  <figure>
+  <img src="./static/mosar/ffhq-intrinsics.png" alt="Trulli" style="width:60%">
+  <figcaption>Samples from the proposed <em>FFHQ-UV-Intrinsics</em> dataset. For each subject, we estimate the light normalized  $\mathcal{M}$, diffuse $\mathcal{D}$, specular $\mathcal{S}$, normal $\mathcal{N}$, ambient occlusion $\mathcal{A}$ and translucency $\mathcal{T}$ texture maps. </figcaption>
+</figure>
+		  </p>
+          
+        </div>
+      </div>
+    </div>
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{dib2023mosar,
+  author    = {Dib, Abdallah and Hafemann, Luiz Gustavo and Got, Emeline and Anderson, Trevor and Fadaeinejad, Amin and Cruz, Rafale M.O and Carbonneau, Marc-André},
+  title     = {MoSAR: Monocular Semi-Supervised Model For Avatar Reconstruction Using Differentiable Shading},
+  journal   = {ArXiv},
+  year      = {2023},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+		  We thank <a
+              href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>  for providing the website template.
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
