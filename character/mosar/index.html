@@ -148,16 +148,28 @@
                   <span>Video</span>
                 </a>
               </span>
-              
-              <!-- Dataset Link. -->
+
+              <!-- Code Link. -->
               <span class="link-block">
                 <a href="#top"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                  </a>
+              </span>
+
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/ubisoft/ubisoft-laforge-FFHQ-UV-Intrinsics"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
                       <i class="far fa-images"></i>
                   </span>
-                  <span>Dataset (coming soon)</span>
+                  <span>Dataset</span>
                   </a>
+              </span>
             </div>
 
           </div>
@@ -350,8 +362,8 @@
         <div class="content has-text-justified">
           <p>
 		  
-            We release a new dataset, named  <em>FFHQ-UV-Intrinsics</em>, that contains intrinsics texture maps for $10$K subjects from the publicly available dataset <a href="https://github.com/csbhr/FFHQ-UV">FFHQ-UV</a>. 
-The <a href="https://github.com/csbhr/FFHQ-UV">FFHQ-UV</a> dataset is composed of texture maps of 1K resolution, for subjects sampled from the latent space of StyleGAN. These texture contains evenly illuminated face images. However, light, geometry and skin reflectance information are entangled in the same texture making them less suitable for relighting.
+            We release a new dataset, named  <a href="https://github.com/ubisoft/ubisoft-laforge-FFHQ-UV-Intrinsics">FFHQ-UV-Intrinsics</a>, that contains intrinsics texture maps for $10$K subjects from the publicly available dataset <a href="https://github.com/csbhr/FFHQ-UV">FFHQ-UV</a>.
+The FFHQ-UV dataset is composed of texture maps of 1K resolution, for subjects sampled from the latent space of StyleGAN. These texture contains evenly illuminated face images. However, light, geometry and skin reflectance information are entangled in the same texture making them less suitable for relighting.
 
 <br />To obtain the intrinsic face attributes, we first re-targeted the texture maps to our own topology and resize them to 512x512. Next, we apply the proposed light normalization and Intrinsic texture maps estimation steps. We then upscale these texture maps to 1K resolution and retarget them back to their original topology. 
 
@@ -377,11 +389,12 @@ Creative Commons Attribution-NonCommercial-NoDerivatives license. The dataset co
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{dib2023mosar,
-  author    = {Dib, Abdallah and Hafemann, Luiz Gustavo and Got, Emeline and Anderson, Trevor and Fadaeinejad, Amin and Cruz, Rafale M.O and Carbonneau, Marc-André},
+    <pre><code>@article{dib2024mosar,
+  author    = {Dib, Abdallah and Hafemann, Luiz G. and Got, Emeline and Anderson, Trevor and Fadaeinejad, Amin and Cruz, Rafael M.O and Carbonneau, Marc-André},
   title     = {MoSAR: Monocular Semi-Supervised Model For Avatar Reconstruction Using Differentiable Shading},
-  journal   = {ArXiv},
-  year      = {2023},
+  journal   = {arXiv preprint arXiv:2312.13091},
+  year      = {2024},
+}
 }</code></pre>
   </div>
 </section>
