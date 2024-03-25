@@ -22,12 +22,6 @@
     gtag('config', 'G-PYVRSFMDRL');
   </script>
 	
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-</script>
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -351,14 +345,14 @@
         <div class="content has-text-justified">
           <p>
 		  
-            We release a new dataset, named  <a href="https://github.com/ubisoft/ubisoft-laforge-FFHQ-UV-Intrinsics">FFHQ-UV-Intrinsics</a>, that contains intrinsics texture maps for $10$K subjects from the publicly available dataset <a href="https://github.com/csbhr/FFHQ-UV">FFHQ-UV</a>.
+            We release a new dataset, named  <a href="https://github.com/ubisoft/ubisoft-laforge-FFHQ-UV-Intrinsics">FFHQ-UV-Intrinsics</a>, that contains intrinsics texture maps for 10K subjects from the publicly available dataset <a href="https://github.com/csbhr/FFHQ-UV">FFHQ-UV</a>.
 The FFHQ-UV dataset is composed of texture maps of 1K resolution, for subjects sampled from the latent space of StyleGAN. These texture contains evenly illuminated face images. However, light, geometry and skin reflectance information are entangled in the same texture making them less suitable for relighting.
 
 <br />To obtain the intrinsic face attributes, we first re-targeted the texture maps to our own topology and resize them to 512x512. Next, we apply the proposed light normalization and Intrinsic texture maps estimation steps. We then upscale these texture maps to 1K resolution and retarget them back to their original topology. 
 
 
 <br />The resulting dataset, <em>FFHQ-UV-Intrinsics</em>, is being publicly released for the research community under 
-Creative Commons Attribution-NonCommercial-NoDerivatives license. The dataset contains diffuse, specular, ambient occlusion, translucency and normal maps for $10$K subjects. This is the first dataset that offer rich intrinsic face attributes at high resolution and at large scale, with the aim of advancing research in this field. 
+Creative Commons Attribution-NonCommercial-NoDerivatives license. The dataset contains diffuse, specular, ambient occlusion, translucency and normal maps for 10K subjects. This is the first dataset that offer rich intrinsic face attributes at high resolution and at large scale, with the aim of advancing research in this field.
           
 		  <figure>
   <img src="./static/mosar/dataset_50.jpg" alt="Dataset samples" style="width:90%">
