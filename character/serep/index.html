@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Face expression capture and retargeting">
+  <meta name="keywords" content="Semantic expression, Face capture, Face retargeting">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SEREP: Semantic Facial Expression Representation for Robust In-the-Wild Capture and Retargeting</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/serep/ubisoft.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://www.ubisoft.com/en-us/studio/laforge">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <!-- <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>-->
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop title-container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <!-- <h1 class="title is-1 publication-title">SEREP: Semantic Facial Expression Representation for Robust In-the-Wild Capture and Retargeting</h1> -->
+          <h1 class="title is-1 publication-title">
+            <span class="first-part">SEREP: Semantic Facial Expression Representation</span><br>
+            <span class="second-part">for Robust In-the-Wild Capture and Retargeting</span>
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/arthur-josi/">Arthur Josi</a><sup>1*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://luiz.hafemann.ca/">Luiz Gustavo Hafemann</a><sup>2*</sup>,</span>
+            <span class="author-block">
+              <a href="https://abdallahdib.github.io/">Abdallah Dib</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/emeline-got/">Emeline Got</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.etsmtl.ca/etudier-a-lets/corps-enseignant/rcruz">Rafael M. O. Cruz</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://macarbonneau.github.io/">Marc-André Carbonneau</a><sup>2</sup>
+            </span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Ecole de Technologie Supérieure, </span>
+
+            <span class="author-block"><sup>2</sup>Ubisoft LaForge</span><br />
+			
+            <span class="author-block" style="font-size:0.7em"><sup>*</sup>Equal contribution</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+              <span class="link-block">
+                <a href= https://arxiv.org/pdf/2412.14371
+                   class="external-link button is-normal is-rounded is-dark"
+                   target="_blank" 
+                   rel="noopener noreferrer">>
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <!-- <a href="https://www.youtube.com/watch?v=Dy4OC8k1MvU"
+                   class="external-link button is-normal is-rounded is-dark"> -->
+                <a href="#pres" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href= #
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <!-- <i class="far fa-images"></i> -->
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Benchmark (coming soon)</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      
+		<video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/serep/teaser.mp4"
+                    type="video/mp4">
+          </video>
+      
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">SEREP</span> captures and retarget facial expressions from in-the-wild videos<sup>**</sup>. It handles extremes facial expression and headpose while accounting for the target face morphology. 
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div style="text-align: center;">
+      <h2 class="title is-3">SEREP face performance capture and retargeting </h2>
+      
+        <!-- Single Image -->
+        <figure style="margin: 0;">
+          <img src="./static/serep/teaser_small.svg" alt="SVG Example" style="width:90%;">
+        </figure>
+      </div>
+      <!-- Caption -->
+      <!-- <p style="text-align: center; margin-top: 10px;">
+        Views for each of the MultiREX identity along with the corresponding neutral mesh in MultiFace and FLAME topology.
+      </p> -->
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Monocular facial performance capture in-the-wild is challenging due to varied capture conditions, face shapes, and expressions. Most current methods rely on linear 3D Morphable Models, which represent facial expressions independently of identity at the vertex displacement level. We propose SEREP (Semantic Expression Representation), a model that disentangles expression from identity at the semantic level. It first learns an expression representation from unpaired 3D facial expressions using a cycle consistency loss. Then we train a model to predict expression from monocular images using a novel semi-supervised scheme that relies on domain adaptation. In addition, we introduce MultiREX, a benchmark addressing the lack of evaluation resources for the expression capture task. Our experiments show that SEREP outperforms state-of-the-art methods, capturing challenging expressions and transferring them to novel identities. 
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <!-- Paper video. -->
+    <div id="pres" class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video (with audio)</h2>
+        <div class="publication-video">
+
+            <iframe width="560" height="315" src="./static/serep/sup_video.mp4" frameborder="0" type="video/mp4"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            <!-- <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/serep/sup_video.mp4"
+                      type="video/mp4">
+              </video> -->
+
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<!-- CAROUSEL - Results -->
+<section class="hero is-light is-small">
+  <div class="hero-body" >
+  
+    <div class="container" >
+      <div class="container has-text-centered">
+        <h2 class="title is-3">
+          Face capture and retargeting
+        </h2>
+      </div>
+
+      <div id="results-carousel" class="carousel results-carousel" >
+
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="1024px" width="2400px">
+            <source src="./static/serep/ITW_1_combined_video_sound.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="1024px" width="2400px">
+            <source src="./static/serep/multiface_1_combined_video.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="1024px" width="2400px">
+            <source src="./static/serep/video_comparison_for_carousel_arthur_vids.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="1024px" width="2400px">
+            <source src="./static/serep/multiface_2_combined_video.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+
+
+        </div>
+        <div class="container has-text-centered">
+          <p>
+            For each video: (left): input video; (center): capture result, (right) retargeting to another face morphology.<sup>**</sup><br />
+			In-the-wild videos have sound (muted by default)
+          </p>
+          <p>  
+        </br>
+        
+        </br>
+          <h2 class="title is-3">
+            Comparison to state-of-the-art
+          </h2>
+  
+
+          <!-- Comparison to EMICA.<sup>**</sup> -->
+        </p>
+      </div>
+        <!-- <div id="results-carousel" class="carousel results-carousel" > -->
+          <div class="video-container">
+          <div class="item item-chair-tp">
+            <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="1024px" width="2400px">
+              <source src="./static/serep/002421669.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="1024px" width="2400px">
+              <source src="./static/serep/002643814.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+
+          <!-- <div class="item item-shiba">
+            <video poster="" id="shiba" autoplay controls muted loop playsinline height="1024px" width="2400px">
+              <source src="./static/serep/002421669.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-fullbody">
+            <video poster="" id="fullbody" autoplay controls muted loop playsinline height="1024px" width="2400px">
+              <source src="./static/serep/002421669.mp4"
+                      type="video/mp4">
+            </video>
+          </div> -->
+          </div>
+          <p style="text-align: center;">
+		  For each video: (left): input video, (center): <a href="https://github.com/radekd91/inferno/tree/master/inferno_apps/FaceReconstruction" 
+            style="color: #0000EE; text-decoration: underline;">EMICA</a> results, (right) SEREP results. <br/> Top row shows results processing a frontal camera view; Bottom row shows results processing a side view.<sup>**</sup>
+          </p>
+      </div>
+    </div>
+	
+  </div>
+  
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div style="text-align: center;">
+        <h2 class="title is-3">MultiREX benchmark </h2>
+      </div>
+        <div class="content has-text-justified">
+          <p>
+		  
+            We release a new benchmark, named  <a href="https://github.com/ubisoft/ubisoft-laforge-FFHQ-UV-Intrinsics">MultiREX</a> (Multiface Region-based Expression evaluation), that evaluates the estimated geometry of monocular face capture systems considering complex expression sequences under multiple camera views. In particular, the protocol evaluates mesh deformations related to expression alone, treating the identity as a given.
+  <br />
+<br />The benchmark is based on the <a href="https://github.com/facebookresearch/multiface" >Multiface dataset</a>, and includes 8 identities captured simultaneously from five viewpoints: Frontal, two Angled views 
+(yaw rotation around 40 degrees), and two Profile views (yaw rotation around 60 degrees). Each subject performs a range-of-motion 
+sequence covering a wide range of expressions, including extreme and asymmetrical motions. 
+The benchmark comprises 10k ground truth meshes and 49k images. 
+
+<div class="item item-steve">
+  <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+    <source src="./static/serep/multiface_strip.mp4"
+            type="video/mp4">
+  </video>
+</div>
+<br /> We obtain the ground truth identity (i.e., neutral mesh) by manually selecting a neutral frame for each subject and retopologizing the corresponding mesh to the <a
+href="https://flame.is.tue.mpg.de/">FLAME</a> topology using the <a href="https://faceform.com/">Wrap 3D</a> commercial software. From these two meshes, we compute a per-subject sparse conversion matrix that enables fast conversion from the FLAME to the Multiface topology and later quantitative evaluation.
+<br />
+<!-- <br /> We adopt a region-based evaluation method, dividing the face into four regions and performing region-based rigid alignment before assessment. This avoids penalizing a model due to rigid misalignment between the predicted and GT meshes, and instead focuses on the non-rigid deformations. The regions we evaluate are the forehead, cheek, mouth, and nose. For each region, we find the optimal rigid alignment between the GT and predicted meshes in the Multiface topology and compute the per-vertex error. -->
+
+<br /> <b>The benchmark is being made public (coming soon), and we release:</b> <b>(i)</b> the code to download assets, <b>(ii)</b> neutral meshes in the FLAME topology alongside the code to convert between FLAME and Multiface topologies, <b>(iii)</b> code to run the benchmark and compute the metrics.
+		  </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+
+      
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- First Image -->
+        <figure style="text-align: center; margin: 0;">
+          <img src="./static/serep/benchmark_views_crop1.jpg" alt="Dataset samples" style="width:90%;">
+        </figure>
+        <!-- Second Image -->
+        <figure style="text-align: center; margin: 0;">
+          <img src="./static/serep/benchmark_views_crop2.jpg" alt="Dataset samples" style="width:90%;">
+        </figure>
+      </div>
+      <!-- Shared Caption -->
+
+    </div>
+    <p style="text-align: center;">
+      Camera views and identities included in the MultiREX benchmark, along with their corresponding neutral meshes in MultiFace and FLAME topologies
+    </p>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{josi2024serep,
+    title={SEREP: Semantic Facial Expression Representation for Robust In-the-Wild Capture and Retargeting},
+    author={Josi, Arthur and Hafemann, Luiz Gustavo and Dib, Abdallah and Got, Emeline and Cruz, Rafael MO and Carbonneau, Marc-Andre},
+    journal={arXiv preprint arXiv:2412.14371},
+    year={2024}
+}
+</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+		  We thank <a
+              href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>  for providing the website template.
+          </p>
+          <p>
+          <sup>**</sup>Source videos: self-capture, <a href="https://github.com/facebookresearch/multiface">Multiface</a>, and Youtube: 
+          <a
+          href="https://www.youtube.com/watch?v=EXsABLv_F8Y">Video 1</a>, 
+          <a
+          href="https://www.youtube.com/watch?v=_0q5WkK91xU_14_0">Video 2</a>, 
+          <a
+          href="https://www.youtube.com/watch?v=dA2EpHCZ8as_0_0">Video 3</a>, 
+          <a
+          href="https://www.youtube.com/watch?v=Zzu6DPkYtG8_11_1">,Video 4</a>, and  
+          <a
+          href="https://www.youtube.com/watch?v=6HH1VV20KGE_3_1">Video 5 </a> 
+        </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
