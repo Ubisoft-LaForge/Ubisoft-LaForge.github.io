@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Geometry-Aware Texture Generation for 3D Head Modeling with Artist-driven Control.">
+  <meta name="keywords" content="Generative model, texture synthesis, GAN, GNN, StyleGAN">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Geometry-Aware Texture Generation for 3D Head Modeling with Artist-driven Control</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/ubisoft.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://www.ubisoft.com/en-us/studio/laforge">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <!-- <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Geometry-Aware Texture Generation for 3D Head Modeling with Artist-driven Control</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://aminfadaei116.github.io/">Amin Fadaeinejad</a><sup>*1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://abdallahdib.github.io/">Abdallah Dib</a><sup>*1</sup>,</span>
+            <span class="author-block">
+              <a href="https://luiz.hafemann.ca/">Luiz Gustavo Hafemann</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/emeline-got/">Emeline Got</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/t-anderson/">Trevor Anderson</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/amaurydepierre/">Amaury Depierre</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.biomotionlab.ca/niko-troje/">Nikolaus F. Troje</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://mbrubake.github.io/">Marcus A Brubaker</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://macarbonneau.github.io/">Marc-André Carbonneau</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Ubisoft LaForge,</span>
+            <span class="author-block"><sup>2</sup>York University</span><br />
+			<span class="author-block" style="font-size:0.7em"><sup>*</sup>Equal contribution</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (comming soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv (comming soon)</span>
+                </a>
+              </span>
+              
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<div>
+<h1 style="text-align: center;font-size: 20px;font-weight: bold;">We propose a generative head model that gives artists control over facial structure, skin tone variations, and fine-grained details. <br><br></h1>
+
+
+
+</div>
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="column">
+        <h2 class="title is-5">Consistent generation</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              Our generator creates full facial heads with consistent geometry and appearance.
+            </p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/shape.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+        
+
+        <div class="column">
+        <h2 class="title is-5">Skin tone control</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              Our model allows for precise and intuitive manipulation of skin tones while preserving other facial attributes.
+            </p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/color.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+
+
+        <div class="column">
+        <h2 class="title is-5">Fine Detail Editing</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              Our model enables intuitive editing of fine details, such as adding/removing wrinkles and adjusting folds...
+            </p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/edit.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+        <div class="item item-fullbody">
+          
+    </div>
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Creating realistic 3D head assets for virtual characters that match a precise artistic vision remains labor-intensive. We present a novel framework that streamlines this process by providing artists with intuitive control over generated 3D heads. Our approach uses a geometry-aware texture synthesis pipeline that learns correlations between head geometry and skin texture maps across different demographics.
+The framework offers three levels of artistic control: manipulation of overall head geometry, adjustment of skin tone while preserving facial characteristics, and fine-grained editing of details such as wrinkles or facial hair. Our pipeline allows artists to make edits to a single texture map using familiar tools, with our system automatically propagating these changes coherently across the remaining texture maps needed for realistic rendering.
+Experiments demonstrate that our method produces diverse results with clean geometries. We showcase practical applications focusing on intuitive control for artists, including skin tone adjustments and simplified editing workflows for adding age-related details or removing unwanted features from scanned models. This integrated approach aims to streamline the artistic workflow in virtual character creation.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <!-- <div class="column">
+        <div class="content">
+          <h2 class="title is-3">Visual Effects</h2>
+          <p>
+            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
+            would be impossible without nerfies since it would require going through a wall.
+          </p>
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dollyzoom-stacked.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div> -->
+      <!--/ Visual Effects. -->
+
+      <!-- Matting. -->
+      <!-- <div class="column">
+        <h2 class="title is-3">Matting</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/matting.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div> -->
+    </div>
+    <!--/ Matting. -->
+
+
+
+<!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Pipeline</h2>
+
+        <div class="content has-text-justified">
+          <figure>
+  <img src="./static/images/fig1_page-0001.jpg" alt="Dataset samples" style="width:90%">
+</figure>
+<p>
+  Overview of the proposed pipeline: A generator <i>𝓕</i> generates a mesh. Another generator <i>G</i> generates an intermediate skin representation: a melanin map <i>𝓜</i> and a high-frequency details map <i>𝓗</i>. 
+  <i>G<sub>𝓐</sub></i> generates a color map <i>𝓐</i> from <i>𝓜</i>, allowing for precise control of skin tone. 
+  <i>G<sub>𝓒</sub></i> generates a final skin reflectance map <i>𝓒</i>, incorporating arbitrary manipulations on <i>𝓗</i>. 
+  <i>G<sub>ε</sub></i> decomposes the intrinsic face reflectance maps, which can be used to render realistic heads.
+</p>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Concurrent Work. -->
+
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <!-- <h2 class="title is-3">Pipeline</h2>
+
+<figure>
+  <img src="./static/images/fig1_page-0001.jpg" alt="Dataset samples" style="width:90%">
+  <figcaption>
+
+<p>
+  Overview of the proposed pipeline. Generator <i>𝓕</i> generates a mesh and <i>G</i> generates an intermediate skin representation: a melanin map <i>𝓜</i> and a high-frequency details map <i>𝓗</i>. 
+  <i>G<sub>𝓐</sub></i> generates a color map <i>𝓐</i> from <i>𝓜</i>, allowing for precise control of skin tone. 
+  <i>G<sub>𝓒</sub></i> generates a final skin reflectance map <i>𝓒</i>, incorporating arbitrary manipulations on <i>𝓗</i>. 
+  <i>G<sub>ε</sub></i> decomposes the intrinsic face reflectance maps, which can be used to render realistic heads.
+</p>
+   </figcaption>
+</figure> -->
+
+
+        <!-- Interpolating. -->
+        <h2 class="title is-3">Video</h2>
+        <div class="content has-text-justified">
+<div class="content has-text-centered">
+          <video id="replay-video"
+                 controls
+                 muted
+                 preload
+                 playsinline
+                 width="75%">
+            <source src="./static/videos/script-CVPR-workshop-2025-paper.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        </div>
+        
+        <!--/ Re-rendering. -->
+
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+
+    <!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Our Contributions</h2>
+
+        <div class="content has-text-justified">
+          <p>&#8226;
+            A multi-level control framework for 3D head generation that enables artists to manipulate geometry, skin tone, and fine details independently.
+          </p>
+          <p>&#8226;
+            A geometry-aware texture generation approach that maintains consistency between facial structure and appearance.
+          </p>
+          <p>&#8226;
+            A novel approach for editing fine-grained details in intrinsic texture maps. This allows artists to modify a single texture map using any image editing tool, with the changes coherently propagated to the intrinsic texture maps. 
+          </p>
+          <p>&#8226;
+            A data-driven method for precise manipulation of skin tones while preserving other facial attributes, enabling greater diversity in virtual character creation.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Concurrent Work. -->
+
+  </div>
+
+
+
+
+
+
+
+
+</section>
+
+<!-- 
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">More Results</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/avatar1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/avatar2.mp4"
+                    type="video/mp4">
+          </video>
+          <figcaption>Avatar 1 - Steve</figcaption>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/avatar3.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{Fadaeinejad_2025_cveu,
+  author    = {Amin Fadaeinejad, Abdallah Dib, Luiz Gustavo Hafemann, Emeline Got, Trevor Anderson, Amaury Depierre, Nikolaus F. Troje, Marcus A Brubaker, Marc-André Carbonneau},
+  title     = {Geometry-Aware Texture Generation for 3D Head Modeling with Artist-driven Control},
+  journal   = {AI for Creative Visual Content Generation Editing and Understanding (CVEU), CVPR Workshop},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            We thank <a
+              href="https://github.com/nerfies/nerfies.github.io">NeRFies</a> for providing the website template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
