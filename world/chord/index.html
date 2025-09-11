@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="Project page for paper: \"Chord: Chain of Rendering Decomposition for PBR Material Estimation from Generated Texture Images\"">
+  <meta property="og:title" content="Chord: Chain of Rendering Decomposition for PBR Material Estimation from Generated Texture Images"/>
+  <meta property="og:description" content=""Project page for paper: \"Chord: Chain of Rendering Decomposition for PBR Material Estimation from Generated Texture Images\""/>
+  <meta property="og:url" content="https://ubisoft-laforge.github.io/world/chord"/>
+
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="Appearance Modeling, Material Generation, Texture Synthesis, SVBRDF, Image-conditional Diffusion Models">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>Chord: Chain of Rendering Decomposition for PBR Material Estimation from Generated Texture Images</title>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+      <!-- Replace the content tag with appropriate information -->
+      <meta name="description" content="Project page for paper: \"Chord: Chain of Rendering Decomposition for PBR Material Estimation from Generated Texture Images\"">
+      <meta property="og:title" content="Chord: Chain of Rendering Decomposition for PBR Material Estimation from Generated Texture Images"/>
+      <meta property="og:description" content=""Project page for paper: \"Chord: Chain of Rendering Decomposition for PBR Material Estimation from Generated Texture Images\""/>
+      <meta property="og:url" content="https://ubisoft-laforge.github.io/world/chord"/>
+
+      <!-- Keywords for your paper to be indexed by-->
+      <meta name="keywords" content="Appearance Modeling, Material Generation, Texture Synthesis, SVBRDF, Image-conditional Diffusion Models">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <title>Chord: Chain of Rendering Decomposition for PBR Material Estimation from Generated Texture Images</title>
+      <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+      <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+      <link rel="stylesheet" href="static/css/bulma.min.css">
+      <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+      <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+      <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+      <link rel="stylesheet" href="static/css/index.css">
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+      <script defer src="static/js/fontawesome.all.min.js"></script>
+      <script src="static/js/bulma-carousel.min.js"></script>
+      <script src="static/js/bulma-slider.min.js"></script>
+      <script src="static/js/index.js"></script>
+      <script src="static/js/video-compare.js"></script>
+
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+      <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          chtml: {
+            scale: 1.0
+          }
+        };
+      </script>
+    </head>
+    <body>
+      <section class="hero">
+        <div class="hero-body">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered">
+              <div class="column has-text-centered">
+                <h1 class="title is-2 publication-title">
+                  Chord: <span class="has-text-weight-bold">Ch</span>ain <span class="has-text-weight-bold">o</span>f <span class="has-text-weight-bold">R</span>endering <span class="has-text-weight-bold">D</span>ecomposition for PBR Material Estimation
+                  from Generated Texture images
+                </h1>
+                <div class="is-size-5 publication-authors">
+                  <!-- Paper authors -->
+                  <span class="author-block">
+                    <a href="https://orcid.org/0009-0008-8390-3366" target="_blank">Zhi Ying</a><sup>1</sup><sup>*</sup>,
+                  </span>
+                  <span class="author-block">
+                    <a href="https://ribosome-rbx.github.io" target="_blank">Boxiang Rong</a><sup>2</sup><sup>*</sup>,
+                  </span>
+                  <span class="author-block">
+                    <a href="https://ccetaw.github.io" target="_blank">Jingyu Wang</a>,
+                  </span><sup>2</sup>
+                  <span class="author-block">
+                    <a href="https://ultraman-blazar.github.io" target="_blank">Maoyuan Xu</a><sup>1</sup>
+                  </span>
+                </div>
+                <div class="is-size-5 publication-authors">
+                  <span class="author-block">Ubisoft La Forge<sup>1</sup>, ETH Zürich<sup>2</sup><br>SIGGRAPH Asia 2025</span>
+                  <span class="eql-cntrb"><small><br><sup>*</sup>Equal Contribution</small></span>
+                </div>
+                <div class="column has-text-centered">
+                  <div class="publication-links">
+                    <!-- Arxiv PDF link -->
+                    <span class="link-block">
+                      <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+                    <!-- Supplementary PDF link -->
+                    <span class="link-block">
+                      <a href="static/pdfs/appendix.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Supplementary</span>
+                      </a>
+                    </span>
+                    <!-- ArXiv abstract Link -->
+                    <span class="link-block">
+                      <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="ai ai-arxiv"></i>
+                        </span>
+                        <span>arXiv</span>
+                      </a>
+                    </span>
+                    <!-- Github link -->
+                    <span class="link-block">
+                      <a target="_blank" class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fab fa-github"></i>
+                        </span>
+                        <span>Code (Coming Soon)</span>
+                      </a>
+                    </span>
+                    <!-- HuggingFace link -->
+                    <span class="link-block">
+                      <a href="https://huggingface.co/Ubisoft/Mujica" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">🤗</span>
+                        <span>Model (Coming Soon)</span>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Teaser video-->
+      <section class="hero teaser">
+        <div class="container is-max-desktop">
+          <div class="hero-body">
+            <video poster="" id="tree" autoplay loop muted disablepictureinpicture height="100%">
+              <!-- Your video here -->
+              <source src="static/videos/teaser_video.mp4" type="video/mp4">
+            </video>
+            <h2 class="subtitle has-text-centered">
+              PBR materials generated by our method.
+            </h2>
+          </div>
+        </div>
+      </section>
+      <!-- End teaser video -->
+      <!-- Paper abstract -->
+      <section class="section hero is-light">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Abstract</h2>
+              <div class="content has-text-justified">
+                <p>
+                  In this paper we propose a novel <b>generate-and-estimate</b> framework to produce high-quality SVBRDF channels for physically-based rendering of materials. In the <i>generation</i> stage, we leverage the diverse conditioning techniques of large text-to-image models to synthesize tileable texture images with unprecedented creative control. In the <i>estimation</i> stage, we introduce a <b>chain-of-rendering-decomposition (Chord)</b> scheme, which sequentially predicts SVBRDF channels by feeding previously extracted representations into a single-step, image-conditioned diffusion model. Our material estimation method demonstrates strong robustness on both generated textures and in-the-wild photographs. Moreover, we showcase the flexibility of our entire framework across diverse applications, including text-to-material, image-to-material, structure-guided generation, and material editing.
+                </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End paper abstract -->
+      <!-- method overview -->
+      <section class="section hero is-fullhd">
+        <div class="container">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Method Overview</h2>
+            </div>
+          </div>
+          <div class="hero-body">
+            <video poster="" id="tree" autoplay loop muted disablepictureinpicture height="100%">
+              <!-- Your video here -->
+              <source src="static/videos/chord_pipeline.mp4" type="video/mp4">
+            </video>
+            <div class="container is-fullhd">
+              <div class="columns is-centered">
+                <div class="column is-four-fifths">
+                  <div class="content has-text-justified">
+                    <p>
+                      <b>Stage 1:</b> Tileable texture image ($ I_\text{RGB} $) generation using a fine-tuned diffusion model, controllable via user guidance (text prompts, reference images, or other control types).
+                    </p>
+                    <p>
+                      <b>Stage 2:</b> Material estimation predicts SVBRDF channels sequentially:
+                      <ol>
+                        <li>Basecolor $\hat{b}$.</li>
+                        <li>Normal $\hat{n}$ (with height $\hat{h}$ derived via normal integration).</li>
+                        <li>Roughness $\hat{r}$ and metalness $\hat{m}$.</li>
+                      </ol>
+                      Each step's input is computed from previous outputs. <i>LEGO-conditioning</i> provides modality-specific weights while maintaining shared backbone weights for alignment. Details of LEGO-conditioning are provided in Section 4.2.1.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End method overview -->
+      <!-- Image carousel -->
+      <section class="section hero is-small is-light">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-four-fifths">
+                <h2 class="title is-3">Material Estimation Comparisons</h2>
+              </div>
+            </div>
+            <div class="container is-max-desktop">
+              <div id="results-carousel" class="carousel results-carousel">
+                <div class="item is-centered">
+                  <!-- Your image here -->
+                  <img src="static/images/material_estimation/1.jpg" alt="Material 1"/>
+                </div>
+                <div class="item is-centered">
+                  <!-- Your image here -->
+                  <img src="static/images/material_estimation/2.jpg" alt="Material 2"/>
+                </div>
+                <div class="item is-centered">
+                  <!-- Your image here -->
+                  <img src="static/images/material_estimation/3.jpg" alt="Material 3"/>
+                </div>
+                <div class="item is-centered">
+                  <!-- Your image here -->
+                  <img src="static/images/material_estimation/4.jpg" alt="Material 4"/>
+                </div>
+              </div>
+              <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                  <div class="content has-text-justified">
+                    <p>
+                      <br><br>
+                      $\dagger$: re-trained on our dataset, $\ast$: author-provided weights.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End image carousel -->
+      <!-- Image carousel -->
+      <section class="section hero is-small">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-four-fifths">
+                <h2 class="title is-3">Applications</h2>
+                <h2 class="subtitle"><p><br><br></p></h2>
+              </div>
+            </div>
+          </div>
+          <div class="container is-fullhd">
+            <div class="columns is-centered is-vcentered has-text-centered">
+              <div class="column is-two-fifth">
+                <img src="static/images/applications/oak_tree.jpg" alt="Oak Tree Texture"/>
+              </div>
+              <div class="column is-one-fifth">
+                <span style='font-size:80px;'>&#8680;</span>
+                <h2 class="title is-5">Text to Material</h2>
+              </div>
+              <div class="column">
+                <video poster="" autoplay loop muted disablepictureinpicture height="100">
+                  <source src="static/videos/applications/oak_tree.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="columns is-centered is-vcentered has-text-centered">
+              <div class="column is-two-fifth">
+                <video poster="" autoplay loop muted disablepictureinpicture height="100">
+                  <source src="static/videos/applications/from_reference.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-one-fifth">
+                <span style='font-size:80px;'>&#8680;</span>
+                <h2 class="title is-5">Image to Material</h2>
+              </div>
+              <div class="column">
+                <video poster="" autoplay loop muted disablepictureinpicture height="100">
+                  <source src="static/videos/applications/colorful_stone.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="columns is-centered is-vcentered has-text-centered">
+              <div class="column is-two-fifth">
+                <video poster="" autoplay loop muted disablepictureinpicture height="100">
+                  <source src="static/videos/applications/height_control.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-one-fifth">
+                <span style='font-size:80px;'>&#8680;</span>
+                <h2 class="title is-5">Structure-controlled Generation</h2>
+              </div>
+              <div class="column">
+                <div class="comparison-container" id="structure_controlled">
+                  <video class="video-left" data-src="static/videos/applications/stone.mp4" loop autoplay muted playsinline></video>
+                  <video class="video-right" data-src="static/videos/applications/lava.mp4" loop autoplay muted playsinline></video>
+                  <div class="comparison-slider"></div>
+                  <div class="label label-left-top">Before</div>
+                  <div class="label label-right-top">+Lava</div>
+                </div>
+              </div>
+            </div>
+            <div class="columns is-centered is-vcentered has-text-centered">
+              <div class="column is-two-fifth">
+                <video poster="" autoplay loop muted disablepictureinpicture height="100">
+                  <source src="static/videos/applications/edit.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-one-fifth">
+                <span style='font-size:80px;'>&#8680;</span>
+                <h2 class="title is-5">Material Editing</h2>
+              </div>
+              <div class="column">
+                <div class="comparison-container" id="editing">
+                  <video class="video-left" data-src="static/videos/applications/carpet_1.mp4" loop autoplay muted playsinline></video>
+                  <video class="video-right" data-src="static/videos/applications/carpet_2.mp4" loop autoplay muted playsinline></video>
+                  <div class="comparison-slider"></div>
+                  <div class="label label-left-top">Before</div>
+                  <div class="label label-right-top">Edited</div>
+                </div>
+              </div>
+            </div>
+            <div class="columns is-centered is-vcentered has-text-centered">
+              <div class="column is-two-fifth">
+                <video poster="" autoplay loop muted disablepictureinpicture height="100">
+                  <source src="static/videos/applications/add_banana.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-one-fifth">
+                <span style='font-size:80px;'>&#8680;</span>
+                <h2 class="title is-5">Adding 🍌</h2>
+              </div>
+              <div class="column">
+                <div class="comparison-container" id="add_banana">
+                  <video class="video-left" data-src="static/videos/applications/metal.mp4" loop autoplay muted playsinline></video>
+                  <video class="video-right" data-src="static/videos/applications/metal_banana.mp4" loop autoplay muted playsinline></video>
+                  <div class="comparison-slider"></div>
+                  <div class="label label-left-top">Before</div>
+                  <div class="label label-right-top">+Banana</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End image carousel -->
+      <!--BibTex citation -->
+      <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <h2 class="title">BibTeX</h2>
+          <pre><code>BibTex Code Here</code></pre>
+        </div>
+      </section>
+      <!--End BibTex citation -->
+      <footer class="footer">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-8">
+              <div class="content">
+                <p>
+                  This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                  You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- Statcounter tracking code -->
+      <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+      <!-- End of Statcounter Code -->
+    </body>
+  </html>
+
