@@ -1,6 +1,6 @@
 # About
 This is the project page for paper **Chord: Chain of Rendering Decomposition for PBR Material Estimation
-from Generated Texture Images** [[arXiv]()] [[Code]()]
+from Generated Texture Images** [[arXiv](https://arxiv.org/abs/2509.09952)] [[Code](https://github.com/ubisoft/ubisoft-laforge-chord)]
 
 ## Acknowledgments
 Project page were adopted and modified from [Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template).
