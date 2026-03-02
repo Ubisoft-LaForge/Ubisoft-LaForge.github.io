@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Skullptor: High Fidelity 3D Head Reconstruction in Seconds with Multi-View Normal Prediction.">
+  <meta property="og:title" content="Skullptor: High Fidelity 3D Head Reconstruction in Seconds with Multi-View"/>
+  <meta property="og:description" content="High Fidelity 3D Head Reconstruction in Seconds with Multi-View Normal Prediction"/>
+  <meta property="og:url" content="URL OF THE SKULLPTOR WEBSITE"/>
+  <meta property="og:image" content="figures/image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="Skullptor: High Fidelity 3D Head Reconstruction in Seconds with Multi-View">
+  <meta name="twitter:description" content="Skullptor: High Fidelity 3D Head Reconstruction in Seconds with Multi-View Normal Prediction">
+  <meta name="twitter:image" content="figures/image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="keywords" content="3D RECONSTRUCTION, HEAD AVATARS, NORMAL PREDICTION, MULTI-VIEW">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <style>
+
+    .publication-links { margin-top: 1rem; }
+    .link-block { margin-right: 5px; }
+    pre {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .section { padding: 3rem 1.5rem; }
+
+    .publication-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 900 !important;
+      font-size: 3.0rem !important; /* Increased from 2.5rem */
+      line-height: 1.2;
+      margin-bottom: 0.5rem !important;
+      text-align: center;
+    }
+
+    .publication-venue {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.5rem !important;
+      color: #5a5a5a;
+      margin-bottom: 2rem !important;
+      text-align: center;
+    }
+
+    .title.is-3 {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    /* Center all section headers and descriptions */
+    .hero-body .container, .section .container {
+      text-align: center;
+    }
+
+    /* Maintain justified text for the Abstract only (as per SEREP) */
+    .content.has-text-justified {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    /* Affiliation styling */
+    .publication-authors {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.25rem;
+    }
+
+    .author-block a {
+      color: #007bff;
+    }
+
+    .author-block a:hover {
+      text-decoration: underline;
+    }
+
+    .teaser-stack {
+      display: flex;
+      gap: 10px; /* Space between the stacks */
+      align-items: flex-start; /* Align items to the top */
+      width: 100%;
+    }
+    .video-stack-left {
+      display: flex;
+      flex-direction: column;
+      gap: 10px; /* Space between the two videos on the left */
+      width: 37.5%; /* Adjust as needed */
+      align-items: flex-end; /* Add this line to right-align the videos */
+    }
+    .video-right {
+      width: 62.5%; /* Adjust as needed */
+    }
+    .video-stack-left video {
+      width: 78.5%;
+      height: auto;
+    }
+    .video-right video {
+      width: 80%;
+      /* Use a placeholder height or calculate it to match the left stack */
+      height: 80%;
+      object-fit: cover; /* Ensures the video covers the area without distortion */
+    }
+    .comparison-container {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .comparison-container video {
+      width: 100%; /* Adjust for gap */
+      height: auto;
+    }
+    .image-row-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .image-row-container img {
+      width: 23.75%; /* (100% - 3*10px gap) / 4 */
+      height: auto;
+      object-fit: cover;
+    }
+    .video-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-top: 2px;
+      margin-bottom: 5px;
+      color: #4a4a4a;
+    }
+
+    .video-stack-left .video-caption {
+      width: 78.5%;
+    }
+
+    .video-right .video-caption {
+      width: 80%;
+      margin-top: 10px;
+    }
+
+    .swiper {
+      width: 100%;
+    }
+
+
+    .swiper-button-prev,
+    .swiper-button-next,
+    .swiper-pagination {
+      z-index: 10;
+      bottom: -2px !important;
+      padding-bottom: -5px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand" style="width: 100%; justify-content: center;">
+      <a class="navbar-item" href="https://www.ubisoft.com/en-us/studio/laforge/">
+        <span class="icon">
+          <i class="fas fa-home"></i>
+        </span>
+      </a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-2 publication-title">
+              Skullptor: High Fidelity 3D Head Reconstruction in Seconds with Multi-View Normal Prediction
+              <br><span class="is-size-3" style="color: #5a5a5a;">(CVPR 2026)</span>
+            </h1>
+            
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/noe-artru">Noé Artru</a><sup>1,2,3,*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/rukhshanda-hussain-686b061a0/">Rukhshanda Hussain</a><sup>1,3</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/emeline-got/">Emeline Got</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/alexandre-messier-a29a49b/">Alexandre Messier</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://davidlindell.com/">David Lindell</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://abdallahdib.github.io/">Abdallah Dib</a><sup>1</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Ubisoft La Forge,</span>
+              <span class="author-block"><sup>2</sup>University of Toronto,</span>
+              <span class="author-block"><sup>3</sup>ÉTS Montréal</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper (Coming Soon)</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="URL_TO_ARXIV" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv (Coming Soon)</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+
+        <div id="teaser-carousel" class="swiper results-carousel">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="teaser-stack">
+                <div class="video-stack-left">
+                  <video playsinline preload="metadata" id="teaser-v2a" autoplay muted src="videos/Teaser/emeline_input.mp4" type="video/mp4"></video>
+                  <p class="video-caption">Input images</p>
+                  <video playsinline preload="metadata" id="teaser-v2b" autoplay muted src="videos/Teaser/emeline_normals.mp4" type="video/mp4"></video>
+                  <p class="video-caption">Predicted normals</p>
+                </div>
+                <div class="video-right">
+                  <video playsinline preload="metadata" id="teaser-v2c" autoplay muted src="videos/Teaser/emeline_ours.mp4" type="video/mp4" style="height: 100%;"></video>
+                  <p class="video-caption">Reconstructed mesh</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="teaser-stack">
+                <div class="video-stack-left">
+                  <video playsinline preload="metadata" id="teaser-v3b" autoplay muted src="videos/Teaser/alex_input.mp4" type="video/mp4"></video>
+                  <p class="video-caption">Input images</p>
+                  <video playsinline preload="metadata" id="teaser-v3a" autoplay muted src="videos/Teaser/alex_normals.mp4" type="video/mp4"></video>
+                  <p class="video-caption">Predicted normals</p>
+                </div>
+                <div class="video-right">
+                  <video playsinline preload="metadata" id="teaser-v3c" autoplay muted src="videos/Teaser/alex_ours.mp4" type="video/mp4" style="height: 100%;"></video>
+                  <p class="video-caption">Reconstructed mesh</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+        <h2 class="subtitle has-text-centered" style="margin-top: 5px;">
+          TL;DR: Skullptor reconstructs high-fidelity 3D heads in seconds by predicting view-consistent normals from a sparse set of input images and camera poses.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Overview</h2>
+          <video playsinline preload="metadata" poster="" id="overview-gif" autoplay muted loop height="100%" width="100%">
+            <source src="videos/Method_Overview.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-justified">
+            Skullptor takes multi-view input images captured from a light-stage and encodes information from all cameras to predict view-consistent surface normals. For mesh reconstruction, given a spherical mesh initialization and known camera parameters, it iteratively refines the mesh to produce a high-resolution, detailed 3D surface.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3">Overview</h2><br>
+        <video playsinline preload="metadata" poster="" id="overview-gif" autoplay muted loop height="100%" width="100%">
+          <source src="videos/Method_Overview.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle is-max-desktop" style="margin-top: 10px;">
+          Skullptor transforms sparse, multi-view input into detailed 3D surfaces by fusing cross-camera information. Starting from known camera poses and input images, Skullptor first predicts view-consistent surface normals. It then iteratively refines a spherical mesh to recover a detailed 3D surface.
+          Skullptor takes multi-view images and fuses information across cameras to predict view-consistent surface normals. Starting from a spherical mesh and known camera parameters, it then iteratively refines geometry to recover a detailed 3D surface.
+        </h2>
+      </div>
+    </div>
+  </section> -->
+
+  
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3">Method</h2>
+        <div class="container" style="text-align: left;">
+          <img src="figures/model_compressed.png" alt="Skullptor method figure" width="100%"/>
+        </div>
+        <h2 class="subtitle is-max-desktop" style="margin-top: 20px;">
+          <ol>
+            <li>
+              <strong>Multi-view normal prediction</strong> - A cross-view attention mechanism
+              aggregates information across sparse input images to predict surface normals
+              that are geometrically consistent across all views.
+            </li>
+            <li>
+              <strong>Mesh optimization</strong> - The predicted surface normals serve as geometric priors in
+              an inverse-rendering framework, which iteratively refines a spherical mesh to allign with the input normals.
+            </li>
+          </ol>
+          <!-- Skullptor reconstructs meshes in two stages. First, multi-view normal prediction produces geometrically consistent surface normals from sparse input images using cross-view attention. Second, mesh optimization refines geometry using the predicted normals as priors within an inverse-rendering framework. -->
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3">Results</h2>
+        
+        <h2 class="title is-5" style="margin-top: 20px;">Input Image (1 of 10)</h2>
+        <div class="image-row-container">
+          <img src="figures/Results/TG_input.png" alt="Input image 1"/>
+          <img src="figures/Results/arthur_input.png" alt="Input image 2"/>
+          <img src="figures/Results/multiface_6_image.jpg" alt="Input image 3"/>
+          <img src="figures/Results/40_35_008_image.png" alt="Input image 4"/>
+        </div>
+
+        <h2 class="title is-5" style="margin-top: 20px;">Predicted Normal Map</h2>
+        <div class="image-row-container">
+          <img src="figures/Results/TG_normal.png" alt="Normal map 1"/>
+          <img src="figures/Results/arthur_normals.png" alt="Normal map 2"/>
+          <img src="figures/Results/multiface_6_normal.png" alt="Normal map 3"/>
+          <img src="figures/Results/40_35_008_normal.png" alt="Normal map 4"/>
+        </div>
+
+        <h2 class="title is-5" style="margin-top: 20px;">Dynamic Render of Reconstructed Meshes</h2>
+        <div class="image-row-container">
+          <video poster="" autoplay muted loop src="videos/Results/TG_look_up.mp4" type="video/mp4" style="width: 23.75%;"></video>
+          <video poster="" autoplay muted loop src="videos/Results/Arthur_neutral.mp4" type="video/mp4" style="width: 23.75%;"></video>
+          <video poster="" autoplay muted loop src="videos/Results/Multiface6_033608.mp4" type="video/mp4" style="width: 23.75%;"></video>
+          <video poster="" autoplay muted loop src="videos/Results/NPHM_35_008.mp4" type="video/mp4" style="width: 23.75%;"></video>
+        </div>
+        <h2 class="subtitle is-max-desktop" style="margin-top: 10px;">
+          Our approach generates faithful facial reconstructions with high-frequency geometric details. The above results are achieved using a sparse setup of only 10 input camera views.
+          <!-- High-fidelity 3D head reconstructions are generated from the predicted normal maps and can be dynamically rendered in real-time, showcasing realistic geometry and texture. -->
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3">Comparisons</h2>
+
+        <h2 class="title is-4" style="margin-top: 20px;">Normal Prediction Comparison</h2>
+        <div class="container" style="text-align: center;">
+          <img src="figures/normal_comparison.png" alt="Comparison of predicted normals with baselines" width="100%"/>
+        </div>
+        <h2 class="subtitle is-max-desktop" style="margin-top: 20px;">
+          Compared to current state-of-the-art methods, Skullptor provides more faithful normal maps, significantly improving the reconstruction of fine-scale facial features. This results in higher identity preservation and the successful capture of high-frequency surface details like fine wrinkles.
+          <!-- We compare Skullptor’s normal prediction module with state-of-the-art normal estimation methods, achieving superior results in capturing facial identity and fine wrinkle-level details. -->
+          <!-- Our Multi-View Normal Prediction (MVNP) consistently produces cleaner and more geometrically accurate surface normals compared to state-of-the-art single-view and multi-view baselines, particularly in regions with complex structures like hair and facial details. -->
+        </h2>
+        
+        <h2 class="title is-4" style="margin-top: 40px;">Mesh Reconstruction Comparison</h2>
+        <div class="container" style="text-align: center;">
+          <img src="figures/mesh_comparison.png" alt="Comparison of final mesh reconstruction with baselines" width="100%"/>
+        </div>
+        <h2 class="subtitle is-max-desktop" style="margin-top: 20px;">
+          Qualitative comparison of Skullptor with implicit reconstruction methods. Unlike 2DGS and SuGaR, which exhibit surface noise and loss of fine-scale detail, Skullptor maintains the geometric precision of traditional photogrammetry with significantly lower computational overhead (10&times faster).
+          <!-- The final 3D meshes reconstructed by Skullptor exhibit superior fidelity and fewer artifacts than those generated by competing methods, directly attributable to the high quality of our predicted normal maps. -->
+        </h2>
+
+        <div id="four-d-comparison-carousel" class="swiper results-carousel">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="comparison-container">
+                <figure style="width: 100%; margin: 0;">
+                  <video playsinline preload="metadata" poster="" autoplay muted src="videos/4D_Comparison/emeline_comparison.mp4" type="video/mp4"></video>
+                  <figcaption style="text-align: center; font-size: 0.9rem; color: #4a4a4a; margin-top: 10px;">
+                    Left: Ours &nbsp;&nbsp;|&nbsp;&nbsp; Right: Photogrammetry
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="comparison-container">
+                <figure style="width: 100%; margin: 0;">
+                  <video playsinline preload="metadata" poster="" autoplay muted src="videos/4D_Comparison/alex_comparison.mp4" type="video/mp4"></video>
+                  <figcaption style="text-align: center; font-size: 0.9rem; color: #4a4a4a; margin-top: 10px;">
+                    Left: Ours &nbsp;&nbsp;|&nbsp;&nbsp; Right: Photogrammetry
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+        <div id="number-of-views-comparison-carousel" class="swiper results-carousel">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="comparison-container">
+                <img src="figures/Views_Comparison/views_comparison_2_compressed.png" alt="Comparison 2" style="width: 100%;" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="comparison-container">
+                <img src="figures/Views_Comparison/views_comparison_3_compressed.png" alt="Comparison 3" style="width: 100%;" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="comparison-container">
+                <img src="figures/Views_Comparison/views_comparison_1_compressed.png" alt="Comparison 1" style="width: 100%;" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="comparison-container">
+                <img src="figures/Views_Comparison/views_comparison_4_compressed.png" alt="Comparison 4" style="width: 100%;" />
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+        <h2 class="subtitle is-max-desktop" style="margin-top: 20px;">
+          We analyze the impact of viewpoint sparcity on reconstruction quality. Compared to a traditional photogrammetry baseline (Meshroom), Skullptor showcases much better robustness to low input view counts (eg., 3-6 views).
+          <!-- Visual comparison of how input view count affects reconstruction quality for state-of-the-art photogrammetry (Meshroom) and Skullptor. -->
+          <!-- Skullptor is highly effective even with a minimal number of input views (e.g., 2-4), but leveraging more reference images allows for the recovery of finer geometric details and enhanced robustness to occlusions and challenging lighting conditions. -->
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre style="text-align: left; padding: 0; margin: 0; margin-left: 0; margin-right: 0; overflow-x: auto;"><code style="padding: 0; ">
+  @InProceedings{artru2026skullptor,
+      author    = {Artru, Noé and Hussain, Rukhshanda and Got, Emeline and Messier, Alexandre and Lindell, David and Dib, Abdallah},
+      title     = {Skullptor: High Fidelity 3D Head Reconstruction in Seconds with Multi-View Normal Prediction},
+      booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+      year      = {2026}
+  }
+      </code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. 
+              Website header inspired from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+Title: Skullptor: High Fidelity 3D Head Reconstruction in Seconds with Multi-View
+Normal Prediction
+
+Anonymous Authors, CVPR 2026 Submission
+
+Dynamic carousel containing 3 videos per frame. For each carousel frame: 2 of the videos will be stacked on the left, and another video will be on the right with the same height as the other 2 combined. In total there will be 3 carousel frames. (Teaser)
+
+Overview:
+Gif taking up the width of the page, with a little text description under (overview figure)
+
+Method:
+A figure (from pdf if possible, png otherwise) taking up the width of the page, with a lengthier text description under (method figure)
+
+Results:
+4 images on top taking up the width (Input images)
+4 extra images taking up the width as well (Normal Images)
+Under it, 4 videos aligned to those images (Dynamic render of static meshes)
+
+Comparison:
+1 big figure with a bit of text under (Normal Comparison)
+1 big figure with a bit of text under (Mesh Comparison)
+1 big figure with a bit of text under (Ablation Comparison)
+A carousel containing 3 frames: For each frame, there will be 2 videos side by side (4D comparison)
+A big figure containing results and comparisons with a bit of text under (Number of view comparison)
