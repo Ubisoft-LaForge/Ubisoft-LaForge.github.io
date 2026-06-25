@@ -1,0 +1,31 @@
+analytic
+
+::begin parameters
+float albedo_r 0.0 1.0 0.8
+float albedo_g 0.0 1.0 0.4
+float albedo_b 0.0 1.0 0.1
+::end parameters
+
+::begin shader
+vec3 BRDF( vec3 L, vec3 V, vec3 N, vec3 X, vec3 Y )
+{
+    return vec3(albedo_r, albedo_g, albedo_b) / PI;
+}
+::end shader
+
+::begin isFunc
+float pdfBRDF(vec3 wi, vec3 wo, vec3 normal, vec3 tangent, vec3 bitangent)
+{
+    return max(0.0, dot(normal, wi)) / PI;
+}
+
+vec3 sampleBRDF(float u, float v, vec3 normal, vec3 tangent, vec3 bitangent, vec3 wo, out float pdf)
+{
+    float r = sqrt(u);
+    float phi = 2.0 * PI * v;
+    vec3 local = vec3(r * cos(phi), r * sin(phi), sqrt(max(0.0, 1.0 - u)));
+    vec3 wi = normalize(local.x * tangent + local.y * bitangent + local.z * normal);
+    pdf = max(0.001, dot(normal, wi)) / PI;
+    return wi;
+}
+::end isFunc

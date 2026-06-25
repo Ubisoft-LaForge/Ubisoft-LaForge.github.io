@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paper Title</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230f172a'/%3E%3Ccircle cx='12' cy='13' r='4' fill='%23f8fafc'/%3E%3Ccircle cx='20' cy='19' r='5' fill='%23f59e0b'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ===== Paper Header ===== -->
+  <header class="paper-header">
+    <div class="paper-venue">EGSR 2026</div>
+    <h1 class="paper-title">A Hybrid Neural-Microfacet BRDF Model for Real-Time Rendering</h1>
+
+    <div class="authors">
+      <span class="author">Louis De Oliveira<sup>1,2</sup></span>
+      <span class="author">Anastasia Karpova<sup>1</sup></span>
+      <span class="author">Georges Nader<sup>1</sup></span>
+      <span class="author">Antoine Houdard<sup>1</sup></span>
+      <span class="author">Pierre Mézières<sup>2</sup></span>
+      <span class="author">Damien Rioux-Lavoie<sup>1</sup></span>
+      <span class="author">Romain Pacanowski<sup>2</sup></span>
+
+    </div>
+
+    <div class="affiliations">
+      <sup>1</sup>Ubisoft La Forge
+      <sup>2</sup>Inria
+    </div>
+
+    <div class="paper-links">
+      <a href="#" class="paper-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+        </svg>
+        Paper (Author's version)
+      </a>
+      <a href="#" class="paper-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+        </svg>
+        Supplementary Material
+      </a>
+      <!-- <a href="#" class="paper-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+        Code
+      </a> -->
+      <a href="#interactive-demo" class="paper-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        Interactive Demo
+      </a>
+      <a href="#" class="paper-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        </svg>
+        Data (Coming soon)
+      </a>
+    </div>
+  </header>
+
+  <!-- Teaser Figure -->
+  <figure class="teaser-figure">
+    <img src="figures/new_teaser.png" alt="Teaser image showing the results of our method compared to a microfacet model and a state-of-the-art neural model.">
+    <figcaption class="figure-caption">Our hybrid model is fitted from measured BRDFs and represented as a compact set of microfacet parameters (kd , η, α) and a low dimensional latent code z shared across a single neural network. For each material, the neural correction improves upon the microfacet model
+alone, capturing subtle appearance effects, while the analytical component remains a faithful and useful approximation</figcaption>
+
+  <!-- ===== Abstract ===== -->
+  <section class="paper-section" id="abstract">
+    <h2 class="section-header">Abstract</h2>
+    <p class="abstract-text">
+      Over the past decade, microfacet-based BRDF models have formed the foundation of real-time rendering pipelines. Despite
+      their widespread use, they often fail to reproduce subtle appearance effects arising from complex light–surface interactions,
+      which have led to the emergence of specialized physics-based models for specific optical phenomena (e.g., diffraction, iridescence, multilayers). Although more accurate, these models lose versatility and lack performance for real-time rendering.
+      Recently introduced, neural models have demonstrated their ability to approximate BRDF reference data coming from measurements, simulations, or even complex shading networks. However, most current neural models require relatively large networks,
+      making them costly for real-time rendering. In this paper, we introduce a hybrid model that combines a GGX-type microfacet
+      model and a neural model to leverage the best features of both representations. The neural component corrects the appearance
+      approximated by the microfacet component, allowing much smaller network than in existing neural models. We show that, at
+      identical memory cost, our model approximates measurements better than state-of-the-art neural models for a low evaluation
+      overhead compared to a microfacet-based model. Furthermore, our hybrid model remains easily editable by artists and benefits
+      from an important sampling scheme, making it attractive for both offline and real-time rendering.
+    </p>
+  </section>
+
+  <!-- ===== Interactive Demo ===== -->
+  <section class="paper-section" id="interactive-demo">
+    <h2 class="section-header">Interactive Demo</h2>
+
+    <div class="demo-section">
+      <div class="demo-layout">
+        <!-- Canvas -->
+        <div class="canvas-wrapper">
+          <canvas id="brdf-canvas"></canvas>
+
+          <button id="viewer-toggle" class="viewer-toggle" type="button" aria-pressed="false">
+            Start viewer
+          </button>
+
+          <div id="loading-overlay" class="loading-overlay">
+            <div class="loading-spinner" hidden></div>
+            <div class="loading-text">Viewer stopped. Start it to load the interactive demo.</div>
+          </div>
+
+          <div id="status-message" class="status-message"></div>
+        </div>
+
+        <!-- Controls Panel -->
+        <div class="controls-panel" id="controls-panel">
+          <p class="viewer-idle-message">Start the viewer to show its controls.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="figure-caption">
+      Interactive BRDF viewer. Drag to orbit the camera, scroll to zoom. Change BRDF models and parameters in real time.
+      In environment map mode, the renderer uses multiple importance sampling (MIS) between BRDF and envmap CDFs.
+    </p>
+  </section>
+
+  <!-- ===== Method ===== -->
+  <section class="paper-section" id="method">
+    <h2 class="section-header">Method</h2>
+
+    <div class="method-text">
+      <p>
+      Method
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Results ===== -->
+  <section class="paper-section" id="results">
+    <h2 class="section-header">Results</h2>
+
+    <div class="method-text">
+      <p>
+        Results
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== BibTeX ===== -->
+  <section class="paper-section" id="bibtex">
+    <h2 class="section-header">BibTeX</h2>
+
+    <div class="bibtex-block">
+      <pre id="bibtex-text">@article{paper2025,
+  title     = {Paper Title},
+  author    = {First Author and Second Author and Third Author and Senior Author},
+  journal   = {Venue},
+  volume    = {44},
+  number    = {4},
+  year      = {2025},
+  publisher = {XXX},
+  doi       = {10.1145/XXXXXXX.XXXXXXX}
+}</pre>
+    </div>
+
+    <button class="copy-bibtex-btn" onclick="copyBibtex()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+      </svg>
+      Copy BibTeX
+    </button>
+  </section>
+
+</div><!-- .page-wrapper -->
+
+<!-- ===== Footer ===== -->
+<footer class="paper-footer">
+  <div class="page-wrapper">
+    <p class="footer-text">
+      &copy; 2025 The Authors. Website template inspired by academic supplemental pages.
+      BRDF viewer powered by WebGL2 progressive path tracing.
+    </p>
+  </div>
+</footer>
+
+<script>
+function copyBibtex() {
+  const text = document.getElementById('bibtex-text').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-bibtex-btn');
+    const orig = btn.innerHTML;
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+}
+</script>
+
+<!-- Main ES module entry point -->
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>
