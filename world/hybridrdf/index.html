@@ -125,7 +125,7 @@ alone, capturing subtle appearance effects, while the analytical component remai
   </section>
 
   <!-- ===== Method ===== -->
-  <section class="paper-section" id="method">
+  <!-- <section class="paper-section" id="method">
     <h2 class="section-header">Method</h2>
 
     <div class="method-text">
@@ -133,10 +133,10 @@ alone, capturing subtle appearance effects, while the analytical component remai
       Method
       </p>
     </div>
-  </section>
+  </section> -->
 
   <!-- ===== Results ===== -->
-  <section class="paper-section" id="results">
+  <!-- <section class="paper-section" id="results">
     <h2 class="section-header">Results</h2>
 
     <div class="method-text">
@@ -144,7 +144,7 @@ alone, capturing subtle appearance effects, while the analytical component remai
         Results
       </p>
     </div>
-  </section>
+  </section> -->
 
   <!-- ===== BibTeX ===== -->
   <section class="paper-section" id="bibtex">
@@ -206,6 +206,14 @@ function copyBibtex() {
 </script>
 
 <!-- Main ES module entry point -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.181.2/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.181.2/examples/jsm/"
+  }
+}
+</script>
 <script type="module" src="js/main.js"></script>
 
 </body>
