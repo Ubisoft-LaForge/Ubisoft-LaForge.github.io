@@ -634,6 +634,7 @@ body {
   font-size: 0.8125rem;
   line-height: 1.6;
   color: var(--text);
+  text-align: left;
   white-space: pre;
   margin: 0;
 }
