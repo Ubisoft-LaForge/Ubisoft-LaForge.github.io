@@ -529,6 +529,8 @@ export class UIControls {
   }
 
   _formatParamName(name) {
+    if (name === 'show_ggx') return 'Disable NN';
+
     return name.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   }
 
