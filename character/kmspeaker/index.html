@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Face expression capture and retargeting">
+  <meta name="keywords" content="3D facial animation, Speech-driven animation, Keypoint-based control">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> KM-Speaker: Keypoint-Based Style Control for High-Quality Speech-Driven 3D Facial Animation and Dialogue Localization </title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/serep/ubisoft.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="https://www.ubisoft.com/en-us/studio/laforge">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        </a>
+      </div>
+  </nav>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop title-container">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+
+              <span class="first-part">KM-Speaker: Keypoint-Based Style Control for High-Quality </span><br>
+              <span class="second-part">Speech-Driven 3D Facial Animation and Dialogue Localization</span>
+            </h1>
+
+            <!-- <h2 class="title is-4"> -->
+            <h2 class="publication-conference" style="margin-bottom: 1rem;">
+              <span>Conditionally Accepted at ACM SIGGRAPH Asia 2026</span>
+            </h2>
+
+
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/arthur-josi/">Arthur Josi</a><sup>1,2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/emeline-got/">Emeline Got</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+			  <a href="https://abdallahdib.github.io/">Abdallah Dib</a><sup>2</sup>,
+			  </span>
+              <span class="author-block">
+                <a href="https://luiz.hafemann.ca/">Luiz Gustavo Hafemann</a><sup>2*</sup>,</span>
+              <span class="author-block">
+				  <a href="https://www.etsmtl.ca/etudier-a-lets/corps-enseignant/rcruz">Rafael M. O.
+					Cruz</a><sup>1</sup>
+			  </span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Ecole de Technologie Supérieure, </span>
+			
+              <span class="author-block"><sup>2</sup>Ubisoft La Forge </span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2412.14371" class="external-link button is-normal is-rounded is-dark"
+                    target="_blank" rel="noopener noreferrer">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="#pres" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+
+                <!-- Dataset Link. -->
+                <span class="link-block">
+                  <a href=# class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+
+        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/kmspeaker/Teaser_video_v3.mp4" type="video/mp4">
+        </video>
+
+        <h2 class="subtitle has-text-centered">
+          KM-Speaker is a keypoint-conditioned flow-based generative framework that generates high-quality animations based on global style guidance and frame-level temporal control.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-light is-small" style="background: #fff;">
+    <div class="hero-body">
+      <div class="container">
+        <div style="text-align: center;">
+          <h2 class="title is-3">Example-based generation and dialogue localization</h2>
+
+          <!-- Single Image -->
+          <figure style="margin: 0;">
+            <img src="./static/kmspeaker/teaser_v8_colored_textures.svg" alt="SVG Example" style="width:90%;">
+          </figure>
+        </div>
+      </p> 
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Speech-driven 3D facial animation methods face significant challenges in simultaneously achieving
+              high-fidelity motion and precise artistic control at production quality. Existing controllable models
+              typically learn global style control by relying on large-scale, low-quality in-the-wild datasets that
+              compromise overall animation realism. Furthermore, these frameworks often lack the fine-grained temporal
+              precision required for demanding tasks such as dialogue localization (e.g., dubbing), where matching
+              specific facial expressions is as critical as lip synchronization. We present KM-Speaker
+              (Keypoint-Matching Speaker), a novel keypoint-conditioned flow-based generative framework that provides
+              both global style guidance and frame-level temporal control from reference performances. We propose a
+              disentanglement strategy that separates audio-driven lip motion from keypoint-driven upper-face dynamics,
+              together with a global style context preservation mechanism to ensure coherent full-face expressiveness.
+              KM-Speaker advances example-based 3D facial animation by achieving high-fidelity motion and flexible
+              controllability in a data-constrained setting, consistently outperforming state-of-the-art methods in
+              lip-sync accuracy, style adherence, and expressive temporal control. 
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+      <!-- Paper video. -->
+      <div id="pres" class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+
+            <iframe width="560" height="315" src="./static/kmspeaker/KM_Speaker_SIGGRAPH2026_website_version.mp4" frameborder="0"
+              type="video/mp4" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <!--/ Paper video. -->
+    </div>
+  </section>
+
+  <section class="hero is-light is-small" style="background: #fff;">
+    <div class="hero-body">
+      <div class="container">
+        <div style="text-align: center;">
+          <h2 class="title is-3">Framework</h2>
+
+          <!-- Single Image -->
+          <figure style="margin: 0;">
+            <img src="./static/kmspeaker/approach_v5_textures.svg" alt="SVG Example" style="width:90%;">
+          </figure>
+        </div>
+
+        <div class="content has-text-justified">
+            <p>
+              KM‑Speaker architecture and applications. A source audio signal and two sets of target keypoints are processed independently. Full‑face keypoints provide global style features, while upper‑face keypoints provide temporal style cues. Conditioning the flow model <strong>Ψ</strong> on all inputs enables dialogue localization, where the target upper‑face motion (green boxes) is matched to a new audio clip. Conditioning the same model only on audio and global style enables example‑based generation, where the generated animation's overall style matches the target.
+            </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAROUSEL - Results -->
+  <!-- BLOCK FOR EXample based RESULTS -->
+  <section class="hero is-light is-small">
+    <div class="hero-body">
+
+      <div class="container">
+        <div class="container has-text-centered">
+          <h2 class="title is-3">
+            Example-Based Results
+          </h2>
+
+        <p style="text-align: center;">
+          The following animations are driven by arbitrary audio and conditioned on the global style of a short target animation.
+        </p>
+
+        </div>
+
+        <div id="results-carousel" class="carousel results-carousel">
+          
+          <div class="item item-chair-tp">
+            <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="1024px" width="2400px">
+              <source src="./static/kmspeaker/ours_only_videos/example_based_3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-fullbody">
+            <video poster="" id="fullbody" autoplay controls muted loop playsinline height="1024px" width="2400px">
+              <source src="./static/kmspeaker/ours_only_videos/example_based_1_.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="1024px" width="2400px">
+              <source src="./static/kmspeaker/ours_only_videos/example_based_2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-shiba">
+            <video poster="" id="shiba" autoplay controls muted loop playsinline height="1024px" width="2400px">
+              <source src="./static/kmspeaker/ours_only_videos/example_based_4_.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+
+        <div class="container has-text-centered">
+          <p>
+            For each video: Target animation (left); Generated animation using KM-Speaker (right).
+          </p>
+          <p>
+            <!-- BLOCK FOR EXAMPLE BASED SOTA COMPARISON  -->
+                <br>
+              <h2 class="title is-4">
+                Example-based SOTA comparison
+              </h2>
+
+              </p>
+            </div>
+            <!-- <div id="results-carousel" class="carousel results-carousel" > -->
+            <div class="video-container">
+              <div class="item item-chair-tp">
+                <video poster="" id="chair-tp" controls loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/comparisons/example_based_comparison1_.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-steve">
+                <video poster="" id="steve" controls loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/comparisons/example_based_comparison2.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-steve">
+                <video poster="" id="steve" controls loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/comparisons/example_based_comparison3.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-steve">
+                <video poster="" id="steve" controls loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/comparisons/example_based_comparison4.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <p style="text-align: center;">
+                For each video: Target style animation with no audio (upper-right); Mimic <b>[1]</b>, MSMD <b>[2]</b>, Ours with no context preservation, and Ours generation (lower).
+            </p>
+          </div>
+        </div>
+
+    
+      </div>
+      </div>
+  </section>
+  
+  <!--  just to have a small white section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+
+
+      </div>  
+    </section>
+
+  <!-- BLOCK FOR DIALOGUE LOCALIATION ALL RESULTS -->
+    <section class="hero is-light is-small">
+    <div class="hero-body">
+
+            <!-- BLOCK FOR DIALOGUE LOCALIATION RESULTS ours only -->
+          <div class="container">
+            <div class="container has-text-centered">
+              <h2 class="title is-3">
+                Dialogue Localization Results
+              </h2>
+            </div>
+
+            <p style="text-align: center;">
+              The following animations are driven by translated speech and conditioned on both the global and temporal styles of a short target animation.
+            </p>
+
+            <div id="results-carousel" class="carousel results-carousel">
+
+              <div class="item item-fullbody">
+                <video poster="" id="fullbody" autoplay controls muted loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/ours_only_videos/dialogue_loc_1.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-steve">
+                <video poster="" id="steve" autoplay controls muted loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/ours_only_videos/dialogue_loc_2.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-chair-tp">
+                <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/ours_only_videos/dialogue_loc_3_.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-shiba">
+                <video poster="" id="shiba" autoplay controls muted loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/ours_only_videos/dialogue_loc_4.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+
+
+            <div class="container has-text-centered">
+            <p>
+              For each video: Target animation to dub (left); Generated animation using KM-Speaker (right).
+            </p>
+              <p>
+                <br>
+
+            
+            <!-- BLOCK FOR DIALOGUE LOCALIATION RESULTS comparison-->
+            <h2 class="title is-4">
+              Dialogue localization SOTA comparison
+            </h2>
+
+
+              <!-- Comparison to EMICA.<sup>**</sup> -->
+              </p>
+            </div>
+            <!-- <div id="results-carousel" class="carousel results-carousel" > -->
+            <div class="video-container">
+              <div class="item item-chair-tp">
+                <video poster="" id="chair-tp" controls loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/comparisons/dialogue_loc_comparison1.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-steve">
+                <video poster="" id="steve"  controls loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/comparisons/dialogue_loc_comparison2.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-steve">
+                <video poster="" id="steve"  controls loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/comparisons/dialogue_loc_comparison3.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-steve">
+                <video poster="" id="steve"  controls loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/comparisons/dialogue_loc_comparison4.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <p style="text-align: center;">
+              For each video: Target animation to dub (upper); MeshTalk <b>[3]</b>, Ours_meshTalk_masks, Ours_no_disentangle, and Ours generation (lower).
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+
+  </section>
+
+  <!--  just to have a small white section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+
+
+      </div>  
+    </section>
+
+
+  <!-- BLOCK FOR DIALOGUE LOCALIATION ALL RESULTS -->
+    <section class="hero is-light is-small">
+    <div class="hero-body">
+            
+            <!-- BLOCK FOR DIALOGUE LOCALIATION RESULTS comparison-->
+          <div class="container">
+            <div class="container has-text-centered">
+              <h2 class="title is-3">
+                Generalization Results
+              </h2>
+
+            <p style="text-align: center;">
+              The following animations are driven by arbitrary audio while conditioned on the global style of a short target video. 
+            </p>
+            </div>
+
+              </p>
+            </div>
+            <div class="video-container">
+              <div class="item item-chair-tp">
+                <video poster="" id="chair-tp" controls loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/generalization/generalization1.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-steve">
+                <video poster="" id="steve"  controls loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/generalization/generalization2.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-steve">
+                <video poster="" id="steve"  controls loop playsinline height="1024px" width="2400px">
+                  <source src="./static/kmspeaker/generalization/generalization3.mp4" type="video/mp4">
+                </video>
+              </div>
+
+            </div>
+            <p style="text-align: center;">
+              For each video: Target animation (left); Generated animation (right). 
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+  </section>
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+        @article{josi2026km,
+          title={KM-Speaker: Keypoint-Based Style Control for High-Quality Speech-Driven 3D Facial Animation and Dialogue Localization},
+          author={Josi, Arthur and Got, Emeline and Dib, Abdallah and Hafemann, Luiz Gustavo and Cruz, Rafael MO},
+          journal={arXiv preprint arXiv:2606.28568},
+          year={2026}
+        }
+      </code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+		
+		  <p>
+            *This work was done while the author was at Ubisoft LaForge.
+          </p>
+		  
+          <p>
+            We thank <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a> for providing the website
+            template.
+          </p>
+
+          <p>
+            References: 
+            <br />
+            <span style="padding-left: 2em;">
+            <b>[1]</b> Hui Fu et al., "Mimic: Speaking style disentanglement for speech-driven 3D facial animation", AAAI 2024.
+            </span>
+            <br />
+            <span style="padding-left: 2em;">
+            <b>[2]</b> Yifang Pan et al., "Model See Model Do: Speech-Driven Facial Animation with Style Control", SIGGRAPH 2025.
+            </span>
+            <br />
+            <span style="padding-left: 2em;">
+            <b>[3]</b> Alexander Richard et al., "MeshTalk: 3D face animation from speech using cross-modality disentanglement", ICCV 2021.
+            </span>
+          </p>
+
+        </div>
+      </div>
+    </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
