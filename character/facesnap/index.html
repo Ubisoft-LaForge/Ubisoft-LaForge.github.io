@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>FaceSnap: Real-Time Personalized Lightstage Facial Performance Capture</title>
+  <meta name="description" content="FaceSnap: Real-Time Personalized Lightstage Facial Performance Capture.">
+  <meta property="og:title" content="FaceSnap: Real-Time Personalized Lightstage Facial Performance Capture"/>
+  <meta property="og:description" content="Real-Time Personalized Lightstage Facial Performance Capture"/>
+  <meta property="og:url" content="URL OF THE FACESNAP WEBSITE"/>
+  <meta property="og:image" content="figures/image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="FaceSnap: Real-Time Personalized Lightstage Facial Performance Capture">
+  <meta name="twitter:description" content="FaceSnap: Real-Time Personalized Lightstage Facial Performance Capture">
+  <meta name="twitter:image" content="figures/image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="keywords" content="FACIAL PERFORMANCE CAPTURE, LIGHTSTAGE, REAL-TIME, PERSONALIZED">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <style>
+
+    :root {
+      --accent: #4a6b94;
+      --accent-dark: #3a5578;
+      --accent-soft-bg: rgba(74, 107, 148, 0.1);
+      --accent-soft-border: rgba(74, 107, 148, 0.35);
+      --bg-tint: #f5f7fb;
+    }
+
+    .tldr-text {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #222;
+      line-height: 1.55;
+    }
+
+    .tldr-label {
+      font-weight: 700;
+      color: var(--accent-dark);
+      letter-spacing: 0.04em;
+    }
+
+    .stat-chip {
+      display: inline-block;
+      background: var(--accent-soft-bg);
+      border: 1px solid var(--accent-soft-border);
+      color: var(--accent-dark);
+      font-weight: 700;
+      padding: 0.05em 0.55em;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .publication-links { margin-top: 1rem; }
+    .link-block { margin-right: 5px; }
+    pre {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .section, .hero-body { padding: 4rem 1.5rem; }
+
+    .section-tint, .hero.is-light {
+      background-color: var(--bg-tint) !important;
+    }
+
+    .media-frame {
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 6px 24px rgba(15, 23, 42, 0.1);
+      position: relative;
+    }
+
+    .frame-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .zoomable {
+      cursor: zoom-in;
+    }
+
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    .lightbox-overlay.active {
+      display: flex;
+    }
+
+    .lightbox-overlay img {
+      max-width: 92vw;
+      max-height: 92vh;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .title.is-3, .title.is-4 {
+      position: relative;
+      padding-bottom: 0.6rem;
+    }
+
+    .title.is-3::after, .title.is-4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--accent);
+    }
+
+    .external-link.button {
+      background-color: var(--accent) !important;
+      border-color: var(--accent) !important;
+      color: #fff !important;
+      transition: background-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .external-link.button:hover {
+      background-color: var(--accent-dark) !important;
+      transform: translateY(-1px);
+    }
+
+    .publication-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 900 !important;
+      font-size: 3.0rem !important; /* Increased from 2.5rem */
+      line-height: 1.2;
+      margin-bottom: 0.5rem !important;
+      text-align: center;
+    }
+
+    .publication-venue {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.5rem !important;
+      font-weight: 700;
+      color: var(--accent-dark);
+      margin-bottom: 2rem !important;
+      text-align: center;
+    }
+
+    .title.is-3 {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    /* Center all section headers and descriptions */
+    .hero-body .container, .section .container {
+      text-align: center;
+    }
+
+    /* Maintain justified text for the Abstract only */
+    .content.has-text-justified {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    /* Affiliation styling */
+    .publication-authors {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.25rem;
+    }
+
+    .author-block a {
+      color: var(--accent);
+    }
+
+    .author-block a:hover {
+      color: var(--accent-dark);
+      text-decoration: underline;
+    }
+
+    .teaser-stack {
+      display: flex;
+      gap: 10px; /* Space between the stacks */
+      align-items: flex-start; /* Align items to the top */
+      width: 100%;
+    }
+    .video-stack-left {
+      display: flex;
+      flex-direction: column;
+      gap: 10px; /* Space between the two videos on the left */
+      width: 37.5%; /* Adjust as needed */
+      align-items: flex-end; /* Add this line to right-align the videos */
+    }
+    .video-right {
+      width: 62.5%; /* Adjust as needed */
+    }
+    .video-stack-left video {
+      width: 78.5%;
+      height: auto;
+    }
+    .video-right video {
+      width: 80%;
+      /* Use a placeholder height or calculate it to match the left stack */
+      height: 80%;
+      object-fit: cover; /* Ensures the video covers the area without distortion */
+    }
+    .comparison-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 6px 24px rgba(15, 23, 42, 0.1);
+    }
+    .comparison-container video {
+      width: 100%; /* Adjust for gap */
+      height: auto;
+    }
+    .image-row-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .image-row-container img {
+      width: 23.75%; /* (100% - 3*10px gap) / 4 */
+      height: auto;
+      object-fit: cover;
+    }
+    .video-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-top: 2px;
+      margin-bottom: 5px;
+      color: #4a4a4a;
+    }
+
+    .video-stack-left .video-caption {
+      width: 78.5%;
+    }
+
+    .video-right .video-caption {
+      width: 80%;
+      margin-top: 10px;
+    }
+
+    .swiper {
+      width: 100%;
+    }
+
+
+    .swiper-button-prev,
+    .swiper-button-next,
+    .swiper-pagination {
+      z-index: 10;
+      bottom: -2px !important;
+      padding-bottom: -5px;
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+      color: var(--accent);
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand" style="width: 100%; justify-content: center;">
+      <a class="navbar-item" href="#">
+        <span class="icon">
+          <i class="fas fa-home"></i>
+        </span>
+      </a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-2 publication-title">
+              FaceSnap: Real-Time Personalized Lightstage Facial Performance Capture
+            </h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><a href="https://www.linkedin.com/in/rukhshanda-hussain-686b061a0" target="_blank" rel="noopener">Rukhshanda Hussain</a><sup>1,2</sup>,</span>
+              <span class="author-block"><a href="https://www.linkedin.com/in/noe-artru" target="_blank" rel="noopener">Noé Artru</a><sup>1,2</sup>,</span>
+              <span class="author-block"><a href="https://www.linkedin.com/in/emeline-got" target="_blank" rel="noopener">Emeline Got</a><sup>2,*</sup>,</span>
+              <span class="author-block"><a href="https://luiz.hafemann.ca/" target="_blank" rel="noopener">Luiz Gustavo Hafemann</a><sup>2,*</sup>,</span>
+              <span class="author-block"><a href="https://www.linkedin.com/in/alexandre-messier-a29a49b" target="_blank" rel="noopener">Alexandre Messier</a><sup>2</sup>,</span>
+              <span class="author-block"><a href="https://ca.linkedin.com/in/brandondearlove" target="_blank" rel="noopener">Brandon Dearlove</a><sup>2</sup>,</span>
+              <span class="author-block"><a href="https://menelau.github.io/" target="_blank" rel="noopener">Rafael M. O. Cruz</a><sup>1,&dagger;</sup>,</span>
+              <span class="author-block"><a href="https://abdallahdib.github.io/" target="_blank" rel="noopener">Abdallah Dib</a><sup>2,&dagger;</sup>,</span>
+              <span class="author-block"><a href="https://scholar.google.ca/citations?user=TmfbdagAAAAJ&amp;hl=en" target="_blank" rel="noopener">Eric Granger</a><sup>1,&dagger;</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>École de Technologie Supérieure</span>&nbsp;&nbsp;
+              <span class="author-block"><sup>2</sup>Ubisoft La Forge</span>
+            </div>
+
+            <div class="is-size-6 publication-authors" style="margin-top: 0.75em; color: #5a5a5a;">
+              <span class="author-block"><sup>*</sup>This work was done while the authors were at Ubisoft La Forge.</span>&nbsp;&nbsp;
+              <span class="author-block"><sup>&dagger;</sup>Equal supervision.</span>
+            </div>
+
+            <div class="publication-venue" style="margin-top: 0.5em;">
+              Accepted to WACV 2027
+            </div>
+
+            <div class="publication-links" style="margin-top: 1.5em;">
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (coming soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2608.31033" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-database"></i>
+                  </span>
+                  <span>Benchmark (coming soon)</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="media-frame" style="text-align: center; max-width: 900px; margin-left: auto; margin-right: auto;">
+        <video playsinline preload="metadata" autoplay muted loop controls style="width: 100%;"
+          src="videos/Teaser_FaceSnap/split_output_teaser_new.mp4" type="video/mp4"></video>
+      </div>
+      <div class="container is-max-desktop">
+        <h2 class="subtitle has-text-centered tldr-text" style="margin-top: 5px;">
+          <span class="tldr-label">TL;DR:</span> FaceSnap enables real-time personalized, production-quality facial performance capture from a single monocular camera using a one-time lightstage personalization step — <span class="stat-chip">83 FPS</span>, <span class="stat-chip">4K appearance</span>.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container is-max-desktop" style="padding-bottom: 0;">
+      <div class="columns is-centered has-text-centered" style="margin-bottom: 0;">
+        <div class="column is-four-fifths" style="padding-bottom: 0;">
+          <h2 class="title is-3">Overview</h2>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 12px; text-align: center; max-width: 1100px; margin-left: auto; margin-right: auto;">
+      <div class="media-frame">
+        <img src="figures/overall_figure.jpg" alt="FaceSnap overall pipeline figure" style="width: 100%; display: block;"/>
+      </div>
+      <h2 class="subtitle has-text-justified" style="margin-top: 20px;">
+        FaceSnap — a <strong>fully automated</strong>, <strong>end-to-end</strong> pipeline for facial performance capture. From a one-time multi-view Lightstage capture: (i) multi-stage optimization obtains registered facial animation sequences, (ii) a personalized model is trained to estimate geometry and dynamic appearance, and enables (iii) real-time monocular 4D face capture of new performances at <strong>4K (83 FPS)</strong>.
+      </h2>
+    </div>
+  </section>
+
+
+  
+
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3">Results</h2>
+        
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-4">Geometric Fidelity &amp; Skin Detail</h2>
+      </div>
+
+      <div style="margin-top: 20px; max-width: 1400px; margin-left: auto; margin-right: auto;">
+        <div class="comparison-container" style="justify-content: center;">
+          <div class="media-frame" style="height: 330px;">
+            <span class="frame-badge">Reference View</span>
+            <img src="videos/skin_detail/Frame0000000375.jpg" alt="S2 reference view" class="zoomable" onclick="openLightbox(this.src)" style="height: 100%; width: auto; display: block;" />
+          </div>
+          <div class="media-frame" style="height: 330px;">
+            <span class="frame-badge">Zoom In</span>
+            <video playsinline preload="metadata" autoplay muted loop controls style="height: 100%; width: auto; display: block;"
+              src="videos/skin_detail/s2.mp4" type="video/mp4"></video>
+          </div>
+          <div class="media-frame" style="height: 330px;">
+            <span class="frame-badge">Reference View</span>
+            <img src="videos/skin_detail/Frame0000000394.jpg" alt="S1 reference view" class="zoomable" onclick="openLightbox(this.src)" style="height: 100%; width: auto; display: block;" />
+          </div>
+          <div class="media-frame" style="height: 330px;">
+            <span class="frame-badge">Zoom In</span>
+            <video playsinline preload="metadata" autoplay muted loop controls style="height: 100%; width: auto; display: block;"
+              src="videos/skin_detail/s1.mp4" type="video/mp4"></video>
+          </div>
+        </div>
+        <p class="subtitle has-text-centered" style="margin-top: 20px; font-size: 1.15rem;">
+          FaceSnap captures clean edge flows for geometry in challenging expressions and recovers fine skin detail, from pores to wrinkles — zoom in for details.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-small section-tint">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-4">One Time Optimization</h2>
+      </div>
+
+      <div style="margin-top: 20px; max-width: 1400px; margin-left: auto; margin-right: auto;">
+        <div class="comparison-container">
+          <div style="flex: 1; min-width: 0;">
+            <video playsinline preload="metadata" autoplay muted loop controls style="width: 100%;"
+              src="videos/face_snap_optim/Multi4D_1.mp4" type="video/mp4"></video>
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <video playsinline preload="metadata" autoplay muted loop controls style="width: 100%;"
+              src="videos/face_snap_optim/Multi4D_2.mp4" type="video/mp4"></video>
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <video playsinline preload="metadata" autoplay muted loop controls style="width: 100%;"
+              src="videos/face_snap_optim/output_rom_1.mp4" type="video/mp4"></video>
+          </div>
+        </div>
+        <p class="subtitle has-text-centered" style="margin-top: 20px; font-size: 1.15rem;">
+          FaceSnap recovers faithful geometry with fine details and accurate lip movements for challenging expressions in range of motion, on both Multi4D and our custom Lightstage dataset.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-4">Real Time Tracking</h2>
+      </div>
+
+      <div style="margin-top: 20px; max-width: 1400px; margin-left: auto; margin-right: auto;">
+        <div id="tracker-results-carousel" class="swiper results-carousel">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="comparison-container">
+                <video playsinline preload="metadata" autoplay muted loop controls style="width: 100%;"
+                  src="videos/Face_snap_tracker/track_happy.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="comparison-container">
+                <video playsinline preload="metadata" autoplay muted loop controls style="width: 100%;"
+                  src="videos/Face_snap_tracker/track_articulated.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="comparison-container">
+                <video playsinline preload="metadata" autoplay muted loop controls style="width: 100%;"
+                  src="videos/Face_snap_tracker/track_angry.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+        <p class="subtitle has-text-centered" style="margin-top: 20px; font-size: 1.15rem;">
+          Once the personalized model is built, FaceSnap produces production-quality meshes (at 0.6 ms per frame) and 4K textures (2.9 + 8.5 ms) — <strong>25,000&times; faster</strong> than traditional artist-dependent production pipelines.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-small section-tint">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3">Comparisons</h2>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-4">Comparison of Geometry Reconstruction with State-of-the-Art Methods</h2>
+      </div>
+      <div class="container media-frame" style="text-align: center; margin-top: 20px; max-width: 1400px;">
+        <video playsinline preload="metadata" autoplay muted loop controls style="width: 100%;"
+          src="videos/Geometry_comp_optim/track_methods_row_compressed.mp4" type="video/mp4"></video>
+      </div>
+      <div style="margin-top: 20px; max-width: 1400px; margin-left: auto; margin-right: auto;">
+        <p class="subtitle has-text-centered" style="font-size: 1.15rem;">
+          FaceSnap's one-time optimization recovers geometry that is more faithful to the subject's true shape than monocular feed-forward models (DECA, SEREP) and per-frame multi-view fitting methods (FLAME fitting, Topo4D).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-small section-tint">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-4">Comparison of Appearance Prediction with State-of-the-Art Methods</h2>
+      </div>
+      <div class="container media-frame" style="text-align: center; margin-top: 20px; max-width: 1400px;">
+        <video playsinline preload="metadata" autoplay muted loop controls style="width: 100%;"
+          src="videos/Texture_comparison/output_better_angry.mp4" type="video/mp4"></video>
+      </div>
+      <div style="margin-top: 20px; max-width: 1400px; margin-left: auto; margin-right: auto;">
+        <p class="subtitle has-text-centered" style="font-size: 1.15rem;">
+          FaceSnap recovers fine-grained wrinkles and pore-level details in 4K that general upscalers (e.g., ESRGAN fine-tuned on face data) struggle with. FaceSnap also achieves perceptual comparability to multi-camera optimization methods like Topo4D, which directly bake the texture from multi-view input.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3">Multi4D Benchmark</h2>
+      </div>
+      <div style="margin-top: 20px; max-width: 1100px; margin-left: auto; margin-right: auto;">
+        <h2 class="subtitle has-text-justified" style="font-size: 1.15rem;">
+          We introduce Multi4D, a benchmark based on Multiface that enables direct geometry comparison using each method’s native mesh topology, without requiring retargeting to a common topology. Multi4D establishes a standardized protocol for evaluating dynamic 4D facial reconstructions on range-of-motion sequences, facilitating fair, <strong>topology-invariant</strong> comparisons between approaches.
+        </h2>
+        <h2 class="subtitle has-text-justified" style="font-size: 1.15rem; margin-top: 10px;">
+          To obtain the raw reference meshes used for evaluation, we apply a photogrammetry tool on 38 camera views from Multiface, providing 360-degree coverage around the head. Multi4D comprises six identities, with approximately 1,100–1,500 frames per subject. We release high-resolution raw meshes with approximately <strong>240k vertices</strong> and <strong>399k faces</strong> per frame, together with camera parameters and 1K-resolution textures. We also provide benchmark evaluation code, demo data for one sample frame to demonstrate point-to-surface distance calculation, and data visualization scripts.
+        </h2>
+      </div>
+      <div style="margin-top: 30px; max-width: 1400px; margin-left: auto; margin-right: auto;">
+        <div style="display: flex; gap: 20px; align-items: center; justify-content: center;">
+          <div class="media-frame" style="flex: 0 0 auto; height: 550px;">
+            <video playsinline preload="metadata" autoplay muted loop controls style="height: 100%; width: auto; display: block;"
+              src="videos/Multi4D/EXP_ROM07_mv013_slow.mp4" type="video/mp4"></video>
+          </div>
+          <div class="media-frame" style="flex: 0 0 auto; height: 550px;">
+            <img src="figures/multi4d.jpg" alt="Multi4D benchmark figure" style="height: 100%; width: auto; display: block;"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. 
+              Website header inspired from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="lightbox-overlay" class="lightbox-overlay" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Full resolution reference view" />
+  </div>
+</body>
+</html>
