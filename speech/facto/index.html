@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FACTO Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 26px;
+      color: #1d1d1f;
+      margin: 0;
+    }
+
+    header {
+      background: #000;
+      padding: 20px 2.5rem;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.75rem;
+    }
+
+    header img { height: 60px; width: auto; }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      color: #FFCD00;
+      font: 1.3rem 'Courier New', Courier, monospace;
+    }
+
+    main { padding: 1.25rem; }
+
+    h1 { font-size: 1.7rem; margin: 0 0 1rem; line-height: 1.3; }
+
+    .meta { font-size: .95rem; margin: .3rem 0; }
+
+    .muted { color: #666; }
+
+    .authors { display: flex; flex-wrap: wrap; gap: .3rem 2rem; font-size: .95rem; line-height: 1.4; }
+
+    .authors small { color: #666; }
+
+    .affiliations { font-size: .82rem; margin: .1rem 0 .3rem; }
+
+    sup { font-size: .7em; }
+
+    .facto { color: #0071e3; }
+
+    h3 { font-size: .95rem; font-weight: 600; color: #555; margin: 1.5rem 0 .75rem; }
+
+    h3:first-of-type { margin-top: .5rem; }
+
+    table { display: block; overflow: auto; border-collapse: collapse; }
+
+    th:first-child, th.style { text-align: left; }
+
+    th:first-child { min-width: 22ch; }
+
+    td { font-size: .9rem; }
+
+    .text { padding-right: 1rem; line-height: 1.5; min-width: 32ch; max-width: 32ch; }
+
+    .style { padding: 0 1rem; white-space: nowrap; }
+
+    td.style { color: #555; }
+
+    footer { margin-top: 3rem; font-size: .8rem; color: #888; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="logo"><img src="la-forge.png" alt="La Forge logo" loading="lazy" width="460" height="460">La Forge</span>
+    <img src="ubisoft.png" alt="Ubisoft logo" loading="lazy" width="500" height="162">
+    <img src="logo-concordia-university-montreal.svg" alt="Concordia University logo" loading="lazy" width="395" height="66">
+    <img src="mila.svg" alt="Mila logo" loading="lazy" width="170" height="50">
+    <img src="stellenbosch-university.svg" alt="Stellenbosch University logo" loading="lazy" width="554" height="195">
+  </header>
+
+  <main>
+    <h1>Factorized Self-Supervised Speech Tokenization</h1>
+    <p class="meta"><b>Paper:</b> <a href="https://arxiv.org/abs/XXXX.XXXXX">[arXiv]</a></p>
+    <p class="meta"><b>Authors:</b></p>
+    <div class="authors">
+      <div>Benjamin Van Niekerk<sup>1,2,3</sup><br><small>benjamin.l.vanniekerk@gmail.com</small></div>
+      <div>Jean-Philippe Letendre<sup>1</sup><br><small>jean-philippe.letendre@ubisoft.com</small></div>
+      <div>Nicol Visser<sup>4</sup><br><small>16986431@sun.ac.za</small></div>
+      <div>Hugo Seute<sup>1</sup><br><small>hugo.seute@ubisoft.com</small></div>
+      <div>Herman Kamper<sup>4</sup><br><small>kamperh@sun.ac.za</small></div>
+      <div>Mirco Ravanelli<sup>2,3</sup><br><small>mirco.ravanelli@concordia.ca</small></div>
+    </div>
+    <p class="affiliations muted"><sup>1</sup>Ubisoft La Forge &nbsp;&nbsp; <sup>2</sup>Concordia University &nbsp;&nbsp; <sup>3</sup>Mila &nbsp;&nbsp; <sup>4</sup>Stellenbosch University</p>
+
+    <p class="meta"><b>Abstract:</b></p>
+    <p>
+      Speech tokenizers convert audio into discrete units, enabling language models to process and generate speech.
+      The goal is to learn compact, text-like representations while preserving enough detail to reconstruct a speaker’s voice and delivery.
+      We propose <strong class="facto">Facto</strong>: a factorized tokenizer that disentangles time-varying information (content and prosody) from static components (speaker identity and recording conditions).
+      We build on a recent linear factorization method for self-supervised features, extending it to handle unseen speakers.
+      Then, we cluster the factorized space and train a lightweight decoder to reconstruct audio from the resulting tokens.
+      By removing the static components before clustering, our tokens are more robust to small noise perturbations.
+      We validate this by testing token stability under various noise conditions.
+      Next, we theoretically analyze Facto’s convergence and scaling properties, quantifying how the factorization improves with the number of training speakers.
+      Finally, we evaluate Facto on a range of downstream tasks.
+      We show that greater token stability translates into improved text-to-speech performance and competitive results in voice conversion and spoken language modeling.
+    </p>
+
+  <section>
+    <h2>Text-to-Speech results on Seed-TTS</h2>
+    <p>
+      Below, we present some examples from the text-to-speech evaluation described in Section 3.3 of the paper. <br>
+      We assess 12.5 Hz and 25 Hz versions of the tokenizers on the <a href="https://github.com/BytedanceSpeech/seed-tts-eval">Seed-TTS</a> test-en set. <br>
+      We compare <strong class="facto">Facto</strong> (with codebook sizes of 8192 and 16384) against <a href="https://github.com/lucadellalib/audiocodecs">FocalCodec</a> and <a href="https://github.com/frothywater/kanade-tokenizer">Kanade</a>.
+    </p>
+    <h3>25 Hz</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Target Text</th>
+          <th>Prompt</th>
+          <th class="facto">Facto (codebook 8192)</th><th class="facto">Facto (codebook 16384)</th><th>FocalCodec</th><th>Kanade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="text">She was one of several driven onto the beach.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/001___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/001___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/001___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/001___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/001___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">Real schools, secondary schools giving a general practical education.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/003___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/003___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/003___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/003___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/003___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">There was no replacement for armed forces lost in the fight.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/004___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/004___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/004___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/004___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/004___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">The society of the day held that reward without labour was misguided.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/007___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/007___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/007___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/007___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/007___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">Do unto others as you would have them do to you.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/009___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/009___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/009___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/009___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/009___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">The forehead and throat are black; the back of the head is grey.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/010___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/010___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/010___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/010___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/010___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">The work of the tailor is seen on each side.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/011___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/011___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/011___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/011___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/011___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">He then visited Italy for a few months to regain his health.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/015___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/015___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/015___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/015___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/015___kanade__25.flac"></audio></td></tr>
+      </tbody>
+    </table>
+
+    <h3>12.5 Hz</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Target Text</th>
+          <th>Prompt</th>
+          <th class="facto">Facto (codebook 8192)</th><th class="facto">Facto (codebook 16384)</th><th>FocalCodec</th><th>Kanade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="text">She was one of several driven onto the beach.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/001___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/001___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/001___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/001___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/001___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">Real schools, secondary schools giving a general practical education.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/003___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/003___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/003___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/003___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/003___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">There was no replacement for armed forces lost in the fight.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/004___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/004___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/004___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/004___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/004___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">The society of the day held that reward without labour was misguided.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/007___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/007___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/007___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/007___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/007___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">Do unto others as you would have them do to you.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/009___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/009___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/009___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/009___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/009___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">The forehead and throat are black; the back of the head is grey.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/010___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/010___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/010___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/010___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/010___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">The work of the tailor is seen on each side.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/011___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/011___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/011___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/011___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/011___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">He then visited Italy for a few months to regain his health.</td><td><audio controls preload="metadata" src="audio/tts-seed-tts/015___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/015___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/015___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/015___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-seed-tts/015___kanade__12_5.flac"></audio></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Text-to-Speech Results on Expresso</h2>
+    <p>
+      Next, we test how well the tokenizers generalize beyond read speech. <br>
+      We present supplementary examples on a mix of expressive and spontaneous data from <a href="https://speechbot.github.io/expresso/">Expresso</a> (refer to Table 3 in the paper).
+    </p>
+    <h3>25 Hz</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Target Text</th>
+          <th class="style">Style</th>
+          <th>Prompt</th>
+          <th class="facto">Facto (codebook 8192)</th><th class="facto">Facto (codebook 16384)</th><th>FocalCodec</th><th>Kanade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="text">For the other parties, it is back to business as usual.</td><td class="style">Read - Happy</td><td><audio controls preload="metadata" src="audio/tts-expresso/003___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/003___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/003___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/003___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/003___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">Had it not been for that squirrel, I&#x27;m pretty sure I would have went to Harvard.</td><td class="style">Read - Sad</td><td><audio controls preload="metadata" src="audio/tts-expresso/005___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/005___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/005___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/005___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/005___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">Today in New York, it isn&#x27;t gonna be hazy.</td><td class="style">Read - Whisper</td><td><audio controls preload="metadata" src="audio/tts-expresso/006___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/006___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/006___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/006___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/006___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">Yes, today in Charleston there&#x27;s a very low chance of heavy thunderstorms and rain.</td><td class="style">Read - Sad</td><td><audio controls preload="metadata" src="audio/tts-expresso/007___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/007___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/007___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/007___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/007___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">This is the first time I&#x27;ve ever seen the Northern Lights.</td><td class="style">Improvised - Awe</td><td><audio controls preload="metadata" src="audio/tts-expresso/009___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/009___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/009___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/009___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/009___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">Um I&#x27;m not gonna lie, you&#x27;re scaring me a bit.</td><td class="style">Improvised - Sad+Sympathetic</td><td><audio controls preload="metadata" src="audio/tts-expresso/012___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/012___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/012___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/012___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/012___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">Oh my awful. That is so gross.</td><td class="style">Improvised - Disgusted</td><td><audio controls preload="metadata" src="audio/tts-expresso/013___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/013___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/013___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/013___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/013___kanade__25.flac"></audio></td></tr>
+        <tr><td class="text">That&#x27;s awesome. Do you have all the ingredients you need, or should I run to the store just down the street?</td><td class="style">Improvised - Projected</td><td><audio controls preload="metadata" src="audio/tts-expresso/018___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/018___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/018___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/018___focalcodec__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/018___kanade__25.flac"></audio></td></tr>
+      </tbody>
+    </table>
+
+    <h3>12.5 Hz</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Target Text</th>
+          <th class="style">Style</th>
+          <th>Prompt</th>
+          <th class="facto">Facto (codebook 8192)</th><th class="facto">Facto (codebook 16384)</th><th>FocalCodec</th><th>Kanade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="text">For the other parties, it is back to business as usual.</td><td class="style">Read - Happy</td><td><audio controls preload="metadata" src="audio/tts-expresso/003___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/003___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/003___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/003___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/003___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">Had it not been for that squirrel, I&#x27;m pretty sure I would have went to Harvard.</td><td class="style">Read - Sad</td><td><audio controls preload="metadata" src="audio/tts-expresso/005___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/005___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/005___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/005___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/005___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">Today in New York, it isn&#x27;t gonna be hazy.</td><td class="style">Read - Whisper</td><td><audio controls preload="metadata" src="audio/tts-expresso/006___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/006___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/006___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/006___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/006___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">Yes, today in Charleston there&#x27;s a very low chance of heavy thunderstorms and rain.</td><td class="style">Read - Sad</td><td><audio controls preload="metadata" src="audio/tts-expresso/007___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/007___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/007___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/007___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/007___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">This is the first time I&#x27;ve ever seen the Northern Lights.</td><td class="style">Improvised - Awe</td><td><audio controls preload="metadata" src="audio/tts-expresso/009___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/009___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/009___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/009___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/009___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">Um I&#x27;m not gonna lie, you&#x27;re scaring me a bit.</td><td class="style">Improvised - Sad+Sympathetic</td><td><audio controls preload="metadata" src="audio/tts-expresso/012___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/012___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/012___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/012___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/012___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">Oh my awful. That is so gross.</td><td class="style">Improvised - Disgusted</td><td><audio controls preload="metadata" src="audio/tts-expresso/013___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/013___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/013___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/013___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/013___kanade__12_5.flac"></audio></td></tr>
+        <tr><td class="text">That&#x27;s awesome. Do you have all the ingredients you need, or should I run to the store just down the street?</td><td class="style">Improvised - Projected</td><td><audio controls preload="metadata" src="audio/tts-expresso/018___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/018___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/018___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/018___focalcodec__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso/018___kanade__12_5.flac"></audio></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Examples including interjections, hesitations, and laughter</h3>
+    <p>We also include a few examples showing how the tokenizers handle prompts or text containing interjections, hesitations, and laughter.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Target Text</th>
+          <th class="style">Type</th>
+          <th>Prompt</th>
+          <th class="facto">Facto (8192, 12.5 Hz)</th><th class="facto">Facto (8192, 25 Hz)</th><th class="facto">Facto (16384, 12.5 Hz)</th><th class="facto">Facto (16384, 25 Hz)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="text">Sure. Yeah. Um wow.</td><td class="style">Interjection</td><td><audio controls preload="metadata" src="audio/tts-expresso-special/000___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/000___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/000___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/000___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/000___facto_16384__25.flac"></audio></td></tr>
+        <tr><td class="text">Ooh, ooh, Polly?</td><td class="style">Interjection</td><td><audio controls preload="metadata" src="audio/tts-expresso-special/001___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/001___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/001___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/001___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/001___facto_16384__25.flac"></audio></td></tr>
+        <tr><td class="text">I uh I f I found out through browsing through social media, which is uh</td><td class="style">Hesitation</td><td><audio controls preload="metadata" src="audio/tts-expresso-special/002___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/002___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/002___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/002___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/002___facto_16384__25.flac"></audio></td></tr>
+        <tr><td class="text">Oh my God. I can&#x27;t believe that I lost five thousand dollars.</td><td class="style">Laughing Mood</td><td><audio controls preload="metadata" src="audio/tts-expresso-special/004___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/004___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/004___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/004___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/004___facto_16384__25.flac"></audio></td></tr>
+        <tr><td class="text">Mrs. Clements comes storming onto stage. What does she say?</td><td class="style">Laughing Mood</td><td><audio controls preload="metadata" src="audio/tts-expresso-special/005___reference.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/005___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/005___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/005___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/tts-expresso-special/005___facto_16384__25.flac"></audio></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Voice conversion results on LibriSpeech</h2>
+    <p>
+      This section presents some examples from the voice conversion evaluation described in Section 3.4 of the paper. <br>
+      We sample source lines from the <a href="https://www.openslr.org/12">LibriSpeech</a> test-clean set and convert to the target speaker using just a few seconds of speech for reference. <br>
+      We compare <strong class="facto">Facto</strong> to <a href="https://github.com/frothywater/kanade-tokenizer">Kanade</a> and <a href="https://github.com/QwenAudio/CosyVoice">CozyVoice2</a>.
+    </p>
+    <h3>25 Hz</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th><th>Target</th><th class="facto">Facto (cont.)</th><th class="facto">Facto (codebook 8192)</th><th class="facto">Facto (codebook 16384)</th><th>Kanade</th><th>CosyVoice</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><audio controls preload="metadata" src="audio/vc/121___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/121___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/121___facto_cont__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/121___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/121___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/121___kanade__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/121___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/1995___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/1995___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/1995___facto_cont__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/1995___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/1995___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/1995___kanade__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/1995___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/3570___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/3570___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/3570___facto_cont__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/3570___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/3570___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/3570___kanade__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/3570___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/4077___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/4077___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/4077___facto_cont__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/4077___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/4077___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/4077___kanade__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/4077___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/5639___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/5639___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/5639___facto_cont__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/5639___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/5639___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/5639___kanade__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/5639___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/6829___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/6829___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/6829___facto_cont__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/6829___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/6829___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/6829___kanade__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/6829___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/7176___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/7176___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/7176___facto_cont__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/7176___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/7176___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/7176___kanade__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/7176___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/8230___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/8230___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/8230___facto_cont__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/8230___facto_8192__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/8230___facto_16384__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/8230___kanade__25.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/8230___cozyvoice.flac"></audio></td></tr>
+      </tbody>
+    </table>
+
+    <h3>12.5 Hz</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th><th>Target</th><th class="facto">Facto (cont.)</th><th class="facto">Facto (codebook 8192)</th><th class="facto">Facto (codebook 16384)</th><th>Kanade</th><th>CosyVoice</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><audio controls preload="metadata" src="audio/vc/121___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/121___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/121___facto_cont__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/121___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/121___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/121___kanade__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/121___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/1995___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/1995___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/1995___facto_cont__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/1995___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/1995___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/1995___kanade__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/1995___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/3570___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/3570___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/3570___facto_cont__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/3570___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/3570___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/3570___kanade__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/3570___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/4077___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/4077___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/4077___facto_cont__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/4077___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/4077___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/4077___kanade__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/4077___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/5639___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/5639___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/5639___facto_cont__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/5639___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/5639___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/5639___kanade__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/5639___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/6829___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/6829___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/6829___facto_cont__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/6829___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/6829___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/6829___kanade__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/6829___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/7176___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/7176___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/7176___facto_cont__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/7176___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/7176___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/7176___kanade__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/7176___cozyvoice.flac"></audio></td></tr>
+        <tr><td><audio controls preload="metadata" src="audio/vc/8230___source.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/8230___target.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/8230___facto_cont__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/8230___facto_8192__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/8230___facto_16384__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/8230___kanade__12_5.flac"></audio></td><td><audio controls preload="metadata" src="audio/vc/8230___cozyvoice.flac"></audio></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+    <footer>Copyright © 2026 Ubisoft Entertainment Inc. All rights reserved.</footer>
+  </main>
+</body>
+</html>
